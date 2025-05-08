@@ -1,0 +1,178 @@
+{
+  "personalInfo": {
+    "name": "Zakariae El Mernissi",
+    "title": "Data Scientist & AI Engineer",
+    "company": "Capgemini TS",
+    "email": "zakariaeelmernissi@gmail.com",
+    "phone": "+212 636363170",
+    "dateOfBirth": "08/08/2000",
+    "age": "24",
+    "location": "Casablanca, Morocco",
+    "linkedin": "https://www.linkedin.com/in/el-mernissi-zakariae/"
+  },
+  "education": [
+    {
+      "degree": "Master in Data Science and Big Data",
+      "institution": "Faculté des Sciences et Techniques",
+      "location": "Tanger",
+      "period": "September 2022 - July 2024",
+      "description": "Advanced studies in big data technologies, data science applications."
+    },
+    {
+      "degree": "Bachelor's in Computer Engineering",
+      "institution": "Faculté des Sciences et Techniques",
+      "location": "Tanger",
+      "period": "October 2021 - July 2022",
+      "description": "Comprehensive education in computer engineering principles, software development, and systems design. Developed strong foundations in programming and problem-solving."
+    },
+    {
+      "degree": "DEUST: Mathematics, Computer Science, Physics",
+      "institution": "Faculté des Sciences et Techniques",
+      "location": "Tanger",
+      "period": "September 2018 - June 2021",
+      "description": "Fundamental scientific education covering mathematics, computer science, and physics. Built a strong foundation in analytical thinking and scientific methodology."
+    }
+  ],
+  "experience": [
+    {
+      "date": "03/2024 – present",
+      "title": "Data Scientist & Artificial Intelligence Engineer",
+      "company": "Capgemini TS",
+      "location": "Casablanca",
+      "details": [
+        "Membre principal du laboratoire GenAI, contribuant à la conception de solutions innovantes en intelligence artificielle générative",
+        "Développement d'une solution pour les RH, intégrant l'IA générative pour la gestion et l'interaction avec les CV",
+        "Création d'une application alimentée par l'IA pour analyser les contraintes de la chaîne d'approvisionnement internationale dans l'industrie aérospatiale"
+      ]
+    },
+    {
+      "date": "03/2024 – 08/2024",
+      "title": "Data Scientist & Artificial Intelligence Engineer (Internship)",
+      "company": "Capgemini TS",
+      "location": "Casablanca",
+      "details": [
+        "Développement d'une application de rétro-documentation de code en utilisant l'AI Generative pour améliorer la productivité des développeurs"
+      ]
+    },
+    {
+      "date": "08/2023 – 09/2023",
+      "title": "Data Scientist (Internship)",
+      "company": "Office National des Chemins de Fer (ONCF)",
+      "location": "Rabat",
+      "details": [
+        "Analyse des données fournisseurs et articles à partir du SI Achats & Approvisionnement pour la préparation à la migration"
+      ]
+    },
+    {
+      "date": "04/2022 – 06/2022",
+      "title": "Full-stack Developer (Internship)",
+      "company": "Société Tangéroise de Maintenance (STM)",
+      "location": "Tanger",
+      "details": [
+        "Développement d’une application web pour la réservation de taxis"
+      ]
+    },
+    {
+      "date": "04/2021 – 06/2021",
+      "title": "Intern",
+      "company": "Institut National de la Recherche Agronomique",
+      "location": "Tanger",
+      "details": [
+        "Utilisation du langage de programmation MATLAB dans l'étude du comportement des chèvres"
+      ]
+    },
+    {
+      "date": "06/2019 – 08/2019",
+      "title": "Business Analyst (Seasonal)",
+      "company": "M'nar Park",
+      "location": "Tanger",
+      "details": [
+        "Collecte et organisation de données multisources pour des analyses stratégiques",
+        "Élaboration de rapports et tableaux de bord optimisant les performances opérationnelles"
+      ]
+    }
+  ],
+  "certifications": [
+    {
+      "title": "Oracle Cloud Infrastructure (OCI) Generative AI",
+      "issuer": "Oracle",
+      "date": "2024",
+      "verificationLink": "https://catalog-education.oracle.com/ords/certview/sharebadge?id=A9E60B1455F6CB6862C563C826D9DC49236F74E36FF6AD949AF39A63D2391734"
+    },
+    {
+      "title": "Microsoft Azure AI Fundamentals",
+      "issuer": "Microsoft",
+      "date": "2024",
+      "verificationLink": "#"
+    },
+    {
+      "title": "AWS Partner: Generative AI Essentials",
+      "issuer": "Amazon Web Services",
+      "date": "2024",
+      "verificationLink": "https://www.credly.com/badges/15f13f50-d7c8-4feb-9460-387e20d41502/linked_in_profile"
+    },
+    {
+      "title": "Google Cloud Generative AI Fundamentals",
+      "issuer": "Google Cloud",
+      "date": "2024",
+      "verificationLink": "#"
+    },
+    {
+      "title": "EFSET English Certificate (CEFR Level C1)",
+      "issuer": "EF Education First",
+      "date": "December 2024",
+      "verificationLink": "#"
+    }
+  ],
+  "hackathons": [
+    {
+      "name": "Google Cloud GenAI Hackathon",
+      "date": "2024",
+      "achievement": "First Participation",
+      "score": "4.1/5"
+    },
+    {
+      "name": "AWS Global GenAI Hackathon",
+      "date": "2024",
+      "achievement": "Top 9 Finalist, 2nd Place",
+      "score": "4.6/5"
+    },
+    {
+      "name": "Microsoft Azure Hackathon",
+      "date": "2024",
+      "achievement": "Participant",
+      "score": "4.3/5"
+    }
+  ],
+  "skills": {
+    "programming": ["Python", "SQL", "JavaScript", "React"],
+    "ai_ml": ["LLMs", "RAG", "AI Agents", "TensorFlow", "PyTorch"],
+    "frameworks": ["Langchain", "Hugging Face", "OpenAI", "Langgraph","CrewAI"],
+    "cloud": ["Microsoft Azure", "AWS", "Google Cloud", "Oracle Cloud"],
+    "data": ["Big Data", "Data Analysis", "Data Visualization", "NoSQL", "RDBMS", "Vector databases"],
+    "tools": ["Pandas", "NumPy", "scikit-learn", "Keras", "Hadoop", "Spark", "Hive", "Pig"],
+    "languages": ["English (C1)", "French (Native)", "Arabic (Native)"]
+  },
+  "projects": [
+    {
+      "title": "AI Agent Architecture",
+      "description": "A sophisticated AI agent system with processing pipelines, embeddings, and vector stores"
+    },
+    {
+      "title": "RAG System on Microsoft Azure",
+      "description": "A Retrieval-Augmented Generation system built on Azure for document processing and intelligent search"
+    },
+    {
+      "title": "Codebase Analysis & Documentation Generator",
+      "description": "A GenAI system that analyzes existing codebases to automatically generate retroactive documentation and functional specifications"
+    },
+    {
+      "title": "Flight Search Agent System",
+      "description": "An intelligent multi-agent flight search system that provides users with the best possible flight options"
+    },
+    {
+      "title": "Multi-Agent CSV Analysis System",
+      "description": "A comprehensive multi-agent system for CSV data analysis with CI/CD integration and web application deployment"
+    }
+  ]
+}
