@@ -177,7 +177,8 @@ const CharacterImage = styled.img`
   /* Tablets and small desktops */
   @media (max-width: 992px) {
     height: 150px;
-    right: 31%;
+    right: 29%;
+    bottom: 29px;
   }
   
   /* Tablets */
