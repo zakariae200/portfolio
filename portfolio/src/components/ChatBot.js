@@ -426,17 +426,13 @@ const ChatBot = () => {
       Be concise, professional, and helpful. Do not make up information that is not in the CV.
       NB: Also answer in the same language as the user asks you in.`;
       
-      // Call OpenRouter API to get response from Gemma 3
-      const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+      // Call Netlify function proxy to get response from Gemma 3
+      const response = await fetch('/.netlify/functions/openrouter-proxy', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${process.env.REACT_APP_OPENROUTER_API_KEY}`,
-          'HTTP-Referer': window.location.href,
-          'X-Title': 'Zakariae El Mernissi Portfolio'
         },
         body: JSON.stringify({
-          model: 'google/gemma-3-4b-it:free',
           messages: [
             { role: 'system', content: systemPrompt },
             ...messages.map(msg => ({
@@ -444,9 +440,7 @@ const ChatBot = () => {
               content: msg.text
             })),
             { role: 'user', content: userMessage }
-          ],
-          temperature: 0,
-          max_tokens: 500
+          ]
         })
       });
       
