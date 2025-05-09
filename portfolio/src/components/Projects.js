@@ -542,28 +542,32 @@ const projectsData = [
   {
     id: 3,
     title: "RAG System on AWS",
-    description: "A comprehensive Retrieval-Augmented Generation system built on AWS for document processing, embedding generation, and intelligent search.",
+    description: "A Retrieval-Augmented Generation (RAG) system architected on AWS, featuring a secure, scalable workflow.",
     image: ragAWS,
     tags: ["RAG", "AWS", "Vector Search", "Embeddings", "LLM"],
     categories: ["AWS"],
-    fullDescription: "This architecture demonstrates a complete Retrieval-Augmented Generation (RAG) system implemented on AWS. The system features two main workflows: a document processing pipeline that prepares content for retrieval, and a question-answering system that leverages the processed data to provide accurate responses with citations. The architecture showcases the integration of various AWS services to create a scalable and efficient RAG solution.",
+    fullDescription: "A complete Retrieval-Augmented Generation (RAG) solution on AWS, integrating secure user authentication, scalable document storage, semantic search, and GenAI-powered answering. The system uses a ReactJS frontend on S3/CloudFront, Cognito for auth, API Gateway and Lambda for orchestration, Amazon Titan for embeddings, OpenSearch for retrieval, and Bedrock (Claude 3.5 Sonnet) for answer generation. Responses include reference links for transparency and traceability.",
     keyFeatures: [
-      "Document storage and management in Amazon S3",
-      "Text extraction and OCR processing with Amazon Textract",
-      "Chunking and embedding generation with Amazon Titan",
-      "Vector storage and similarity search with Amazon OpenSearch",
-      "Query embedding and semantic search capabilities",
-      "Response generation with citations to source documents",
-      "Streamlit integration for user interface"
+      "ReactJS app hosted on Amazon S3, delivered via CloudFront",
+      "Secure authentication and user management with Amazon Cognito",
+      "API Gateway and AWS Lambda for serverless backend orchestration",
+      "Question embedding generation with Amazon Titan",
+      "Semantic search and retrieval using Amazon OpenSearch Service",
+      "Document chunk storage and metadata management in Amazon S3",
+      "GenAI-powered answer generation with Amazon Bedrock (Claude 3.5 Sonnet)",
+      "Reference links to original documents included in responses",
+      "Scalable, serverless architecture leveraging AWS managed services"
     ],
     technologies: [
       "Amazon S3",
-      "Amazon Textract",
+      "Amazon CloudFront",
+      "Amazon Cognito",
+      "Amazon API Gateway",
+      "AWS Lambda",
       "Amazon Titan Embeddings",
-      "Amazon OpenSearch Serverless",
-      "Amazon Bedrock",
-      "Streamlit",
-      "Vector/Semantic search"
+      "Amazon OpenSearch Service",
+      "Amazon Bedrock (Claude 3.5 Sonnet)",
+      "ReactJS"
     ]
   },
   {

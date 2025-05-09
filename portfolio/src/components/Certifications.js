@@ -214,7 +214,7 @@ const Certifications = () => {
               Validates expertise in implementing and managing Oracle Cloud Infrastructure's Generative AI services, including large language models, prompt engineering, and AI application development.
             </CertificationDescription>
             <CertificationFooter>
-              <CertificationDate>2024</CertificationDate>
+              <CertificationDate>January 2025</CertificationDate>
               <VerifyButton href="https://catalog-education.oracle.com/ords/certview/sharebadge?id=A9E60B1455F6CB6862C563C826D9DC49236F74E36FF6AD949AF39A63D2391734" target="_blank">
                 Verify <FaExternalLinkAlt />
               </VerifyButton>
@@ -256,7 +256,7 @@ const Certifications = () => {
               Covers essential knowledge of generative AI technologies and AWS services for building and deploying generative AI solutions, including Amazon Bedrock, SageMaker, and other AI/ML services.
             </CertificationDescription>
             <CertificationFooter>
-              <CertificationDate>2024</CertificationDate>
+              <CertificationDate>September 2024</CertificationDate>
               <VerifyButton href="https://www.credly.com/badges/15f13f50-d7c8-4feb-9460-387e20d41502/linked_in_profile" target="_blank">
                 Verify <FaExternalLinkAlt />
               </VerifyButton>
@@ -277,14 +277,34 @@ const Certifications = () => {
               Validates proficiency in Google Cloud's generative AI tools and services, including Vertex AI, PaLM API, and generative AI application development best practices.
             </CertificationDescription>
             <CertificationFooter>
-              <CertificationDate>2024</CertificationDate>
-              <VerifyButton href="#" target="_blank">
+              <CertificationDate>February 2024</CertificationDate>
+              <VerifyButton href="https://partner.cloudskillsboost.google/public_profiles/1cd12157-a00d-4cf2-a725-9cec1df8d1ce/badges/8329808" target="_blank">
                 Verify <FaExternalLinkAlt />
               </VerifyButton>
             </CertificationFooter>
           </CertificationBody>
         </CertificationCard>
         
+        <CertificationCard>
+          <CertificationHeader bgColor="linear-gradient(135deg,rgb(131, 23, 23),rgb(53, 52, 133),rgb(17, 52, 150))">
+            <CertificationLogo src='https://www.alxafrica.com/wp-content/uploads/2023/12/logo-black.svg' alt="ALX" />
+            <div>
+              <CertificationTitle>ALX Data Analyst</CertificationTitle>
+              <CertificationIssuer>ALX Africa</CertificationIssuer>
+            </div>
+          </CertificationHeader>
+          <CertificationBody>
+            <CertificationDescription>
+              Awarded for successful completion of the ALX Data Analyst program. Demonstrates advanced skills in data analytics, data visualization, SQL, Python, and real-world business problem solving using industry-standard tools and methodologies.
+            </CertificationDescription>
+            <CertificationFooter>
+              <CertificationDate>February 2024</CertificationDate>
+              <VerifyButton href="https://intranet.alxswe.com/certificates/8fHNJEz5r2" target="_blank">
+                Verify <FaExternalLinkAlt />
+              </VerifyButton>
+            </CertificationFooter>
+          </CertificationBody>
+        </CertificationCard>
         <CertificationCard>
           <CertificationHeader bgColor="linear-gradient(135deg, #2C3E50, #4CA1AF)">
             <CertificationLogo src="https://images.seeklogo.com/logo-png/45/1/ef-education-first-logo-png_seeklogo-455160.png" alt="EFSET" />
