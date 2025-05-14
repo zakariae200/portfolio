@@ -427,7 +427,7 @@ const ChatBot = () => {
       NB: Also answer in the same language as the user asks you in.`;
       
       // Call Netlify function proxy to get response from Gemma 3
-      const response = await fetch('/.netlify/functions/openrouter-proxy', {
+      const response = await fetch('/api/chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
