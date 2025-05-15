@@ -406,27 +406,7 @@ const ChatBot = () => {
     setIsLoading(true);
     
     try {
-      // Create the system prompt with CV context from JSON file
-      const systemPrompt = `You are a specialized AI assistant for Zakariae El Mernissi, a Data Scientist & AI Engineer. 
-      Your ONLY purpose is to provide accurate information about Zakariae's professional background, skills, education, 
-      projects, and achievements. If asked about anything unrelated to Zakariae's professional information, 
-      politely redirect the conversation back to Zakariae's qualifications and experience.
-      
-      Here is Zakariae information in JSON format that you should use to answer questions:
-      ${JSON.stringify(cvData, null, 2)}
-      
-      IMPORTANT FORMATTING INSTRUCTIONS:
-      1. Format your responses using Markdown syntax for better readability
-      2. Use **bold** for emphasis on important terms and skills
-      3. Use bullet points (*) or numbered lists when listing multiple items
-      4. Use headings (##) for clear section separation when appropriate
-      5. Format code or technical terms with backticks (\`code\`)
-      6. Organize information in a visually appealing way with proper spacing
-      
-      Be concise, professional, and helpful. Do not make up information that is not in the CV.
-      NB: Also answer in the same language as the user asks you in.`;
-      
-      // Call Netlify function proxy to get response from Gemma 3
+      // Call backend API without exposing the system prompt
       const response = await fetch('/api/chat', {
         method: 'POST',
         headers: {
@@ -434,13 +414,13 @@ const ChatBot = () => {
         },
         body: JSON.stringify({
           messages: [
-            { role: 'system', content: systemPrompt },
             ...messages.map(msg => ({
               role: msg.isBot ? 'assistant' : 'user',
               content: msg.text
             })),
             { role: 'user', content: userMessage }
-          ]
+          ],
+          cvData: cvData // Send CV data to backend instead of hardcoding the prompt
         })
       });
       
