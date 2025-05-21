@@ -735,11 +735,11 @@ const Education = () => {
             <FaGraduationCap />
           </IconContainer>
           <EducationContent>
-            <Degree>Master in Mobility and Big Data</Degree>
+            <Degree>Master in Data Science and Big Data</Degree>
             <Institution>Faculté des Sciences et Techniques</Institution>
             <EducationDetails>
               <Period><FaCalendarAlt /> September 2022 - July 2024</Period>
-              <Location><FaMapMarkerAlt /> Tanger</Location>
+              <Location><FaMapMarkerAlt /> Tangier</Location>
             </EducationDetails>
             <Description>
               Advanced studies in big data technologies, mobility solutions, and data science applications. 
@@ -757,7 +757,7 @@ const Education = () => {
             <Institution>Faculté des Sciences et Techniques</Institution>
             <EducationDetails>
               <Period><FaCalendarAlt /> October 2021 - July 2022</Period>
-              <Location><FaMapMarkerAlt /> Tanger</Location>
+              <Location><FaMapMarkerAlt /> Tangier</Location>
             </EducationDetails>
             <Description>
               Comprehensive education in computer engineering principles, software development, 
@@ -775,7 +775,7 @@ const Education = () => {
             <Institution>Faculté des Sciences et Techniques</Institution>
             <EducationDetails>
               <Period><FaCalendarAlt /> September 2018 - June 2021</Period>
-              <Location><FaMapMarkerAlt /> Tanger</Location>
+              <Location><FaMapMarkerAlt /> Tangier</Location>
             </EducationDetails>
             <Description>
               Fundamental scientific education covering mathematics, computer science, and physics. 
