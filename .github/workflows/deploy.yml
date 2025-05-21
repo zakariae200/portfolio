@@ -32,7 +32,3 @@ jobs:
       - name: Deploy frontend to DigitalOcean
         run: |
           rsync -avz --delete ./portfolio/build/ root@${{ secrets.DROPLET_IP }}:/var/www/portfolio/
-
-      - name: Restart backend with PM2
-        run: |
-          ssh root@${{ secrets.DROPLET_IP }} 'cd /root/portfolio/portfolio/server && source ~/.bashrc && pm2 restart portfolio-backend --update-env'
