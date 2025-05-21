@@ -30,7 +30,10 @@ jobs:
           key: ${{secrets.SSH_PRIVATE_KEY}}
           known_hosts: ${{secrets.KNOWN_HOSTS}}
           
-      - name: Deploy to DigitalOcean
+      - name: Deploy frontend to DigitalOcean
         run: |
-          rsync -avz --delete build/ root@${{secrets.DROPLET_IP}}:/var/www/portfolio/
-          ssh root@${{secrets.DROPLET_IP}} 'cd /root/portfolio/portfolio/server && pm2 restart portfolio-backend --update-env'
+          rsync -avz --delete ./portfolio/build/ root@${{ secrets.DROPLET_IP }}:/var/www/portfolio/
+
+      - name: Restart backend with PM2
+        run: |
+          ssh root@${{ secrets.DROPLET_IP }} 'cd /root/portfolio/portfolio/server && pm2 restart portfolio-backend --update-env'
