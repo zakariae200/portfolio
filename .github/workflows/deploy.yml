@@ -35,4 +35,4 @@ jobs:
 
       - name: Restart backend with PM2
         run: |
-          ssh root@${{ secrets.DROPLET_IP }} 'cd /root/portfolio/portfolio/server && pm2 restart portfolio-backend --update-env'
+          ssh root@${{ secrets.DROPLET_IP }} 'cd /root/portfolio/portfolio/server && source ~/.bashrc && pm2 restart portfolio-backend --update-env'
