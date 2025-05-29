@@ -145,7 +145,7 @@
     }
   ],
   "skills": {
-    "programming": ["Python", "SQL", "JavaScript", "React"],
+    "programming": ["Python", "SQL", "JavaScript", "Reactjs"],
     "ai_ml": ["LLMs", "RAG", "AI Agents", "TensorFlow", "PyTorch"],
     "frameworks": ["Langchain", "Hugging Face", "OpenAI", "Langgraph","CrewAI"],
     "cloud": ["Microsoft Azure", "AWS", "Google Cloud", "Oracle Cloud"],

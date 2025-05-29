@@ -22,17 +22,33 @@ jobs:
       - name: Build project
         run: npm run build
         working-directory: portfolio
-        
+
       - name: Install SSH key
         uses: shimataro/ssh-key-action@v2
         with:
           key: ${{secrets.SSH_PRIVATE_KEY}}
           known_hosts: ${{secrets.KNOWN_HOSTS}}
-          
+
       - name: Deploy frontend to DigitalOcean
         run: |
           rsync -avz --delete ./portfolio/build/ root@${{ secrets.DROPLET_IP }}:/var/www/portfolio/
 
-      - name: Restart backend with PM2
+      - name: Deploy Flask backend to DigitalOcean
+        run: |
+          rsync -avz --delete ./portfolio/server/ root@${{ secrets.DROPLET_IP }}:/root/portfolio/portfolio/server/
+
+      - name: Install Python 3 and pip on server
+        run: |
+          ssh root@${{ secrets.DROPLET_IP }} 'sudo apt-get update && sudo apt-get install -y python3 python3-pip python3-venv'
+
+      - name: Install Flask backend dependencies on server
+        run: |
+          ssh root@${{ secrets.DROPLET_IP }} 'cd /root/portfolio/portfolio/server && python3 -m venv venv && source venv/bin/activate && pip install -r requirements.txt'
+
+      - name: Restart Flask backend with PM2
+        run: |
+          ssh root@${{ secrets.DROPLET_IP }} "cd /root/portfolio/portfolio/server && source venv/bin/activate && (pm2 start app.py --interpreter=python3 --name flask-backend || pm2 restart flask-backend)"
+
+      - name: Restart Node backend with PM2
         run: |
           ssh root@${{ secrets.DROPLET_IP }} 'cd /root/portfolio/portfolio/server && source ~/.bashrc && pm2 restart portfolio-backend --update-env'

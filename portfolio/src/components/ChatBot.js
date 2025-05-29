@@ -407,7 +407,7 @@ const ChatBot = () => {
     
     try {
       // Call backend API without exposing the system prompt
-      const response = await fetch('/api/chat', {
+      const response = await fetch('http://localhost:5000/api/chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -429,7 +429,15 @@ const ChatBot = () => {
       }
       
       const data = await response.json();
-      const botResponse = data.choices[0].message.content;
+      // Safely extract the bot response with error handling
+      let botResponse = "Sorry, I couldn't process your request.";
+      
+      if (data.choices && 
+          data.choices[0] && 
+          data.choices[0].message && 
+          typeof data.choices[0].message.content === 'string') {
+        botResponse = data.choices[0].message.content.trim();
+      }
       
       // Add bot response to messages
       setMessages([...updatedMessages, { text: botResponse, isBot: true }]);
