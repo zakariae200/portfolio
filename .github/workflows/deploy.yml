@@ -47,9 +47,4 @@ jobs:
 
       - name: Restart Flask backend with PM2
         run: |
-          ssh root@${{ secrets.DROPLET_IP }} "cd /root/portfolio/portfolio/server && source venv/bin/activate && (pm2 start app.py --interpreter=python3 --name flask-backend || pm2 restart flask-backend)"
-
-      - name: Restart Node backend with PM2
-        run: |
-          ssh root@${{ secrets.DROPLET_IP }} 'cd /root/portfolio/portfolio/server && source ~/.bashrc && pm2 restart portfolio-backend --update-env'
-
+          ssh root@${{ secrets.DROPLET_IP }} "export PATH=$PATH:/root/.nvm/versions/node/v24.0.1/bin && cd /root/portfolio/portfolio/server && source venv/bin/activate && (/root/.nvm/versions/node/v24.0.1/bin/pm2 start app.py --interpreter=python3 --name flask-backend || /root/.nvm/versions/node/v24.0.1/bin/pm2 restart flask-backend)"
