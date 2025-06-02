@@ -374,7 +374,7 @@ const SendButton = styled.button`
 const ChatBot = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([
-    { text: "Hi there! I'm Zakariae's virtual assistant. How can I help you today?", isBot: true }
+    { id: Date.now(), text: "Hi there! I'm Zakariae's virtual assistant. How can I help you today?", isBot: true }
   ]);
   const [inputText, setInputText] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -399,56 +399,99 @@ const ChatBot = () => {
     if (inputText.trim() === '' || isLoading) return;
     
     // Add user message
-    const userMessage = inputText;
-    const updatedMessages = [...messages, { text: userMessage, isBot: false }];
-    setMessages(updatedMessages);
+    const userMessageText = inputText;
+    const userMessage = { text: userMessageText, isBot: false, id: Date.now() + 1 }; // Unique ID for user message
+    setMessages(prevMessages => [...prevMessages, userMessage]);
     setInputText('');
     setIsLoading(true);
+
+    const botMessagePlaceholder = { text: "", isBot: true, id: Date.now() }; // Unique ID for bot placeholder
+    setMessages(prevMessages => [...prevMessages, botMessagePlaceholder]);
     
     try {
-      // Call backend API without exposing the system prompt
       const response = await fetch('/api/chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
+          // Send previous messages (excluding the new placeholder) + current user message
           messages: [
-            ...messages.map(msg => ({
+            ...messages.filter(msg => msg.id !== botMessagePlaceholder.id).map(msg => ({ // Filter out placeholder if it got added early
               role: msg.isBot ? 'assistant' : 'user',
               content: msg.text
             })),
-            { role: 'user', content: userMessage }
+            { role: 'user', content: userMessageText }
           ],
-          cvData: cvData // Send CV data to backend instead of hardcoding the prompt
+          cvData: cvData
         })
       });
       
       if (!response.ok) {
-        throw new Error('Failed to get response from AI');
+        const errorText = await response.text();
+        throw new Error(`Failed to get response from AI. Status: ${response.status}. Details: ${errorText}`);
       }
-      
-      const data = await response.json();
-      // Safely extract the bot response with error handling
-      let botResponse = "Sorry, I couldn't process your request.";
-      
-      if (data.choices && 
-          data.choices[0] && 
-          data.choices[0].message && 
-          typeof data.choices[0].message.content === 'string') {
-        botResponse = data.choices[0].message.content.trim();
+
+      if (!response.body) {
+        throw new Error('Response body is null');
       }
-      
-      // Add bot response to messages
-      setMessages([...updatedMessages, { text: botResponse, isBot: true }]);
+
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder();
+      let buffer = '';
+
+      while (true) {
+        const { value, done } = await reader.read();
+        if (done) break;
+        buffer += decoder.decode(value, { stream: true });
+
+        let eolIndex;
+        while ((eolIndex = buffer.indexOf('\n')) >= 0) {
+          const line = buffer.substring(0, eolIndex).trim();
+          buffer = buffer.substring(eolIndex + 1);
+
+          if (line.startsWith('data:')) {
+            try {
+              const jsonStr = line.substring(5);
+              if (jsonStr === '[DONE]') { // Explicit DONE message check (optional, as stream end also works)
+                break;
+              }
+              const data = JSON.parse(jsonStr);
+              if (data.token) {
+                setMessages(prevMessages =>
+                  prevMessages.map(msg =>
+                    msg.id === botMessagePlaceholder.id
+                      ? { ...msg, text: msg.text + data.token }
+                      : msg
+                  )
+                );
+              } else if (data.error) {
+                setMessages(prevMessages =>
+                  prevMessages.map(msg =>
+                    msg.id === botMessagePlaceholder.id
+                      ? { ...msg, text: msg.text + "Error: " + data.error }
+                      : msg
+                  )
+                );
+                console.error('Streaming error from backend:', data.error);
+                return; // Stop processing further tokens on error
+              }
+            } catch (e) {
+              console.error('Error parsing streamed JSON:', e, 'Original line:', line);
+              // Optionally update UI to show a parsing error for this specific message
+            }
+          }
+        }
+      }
     } catch (error) {
       console.error('Error getting AI response:', error);
-      
-      // Simple error message instead of fallback responses
-      setMessages([...updatedMessages, { 
-        text: "I'm sorry, we're experiencing technical difficulties at the moment. Please try again later.", 
-        isBot: true 
-      }]);
+      setMessages(prevMessages =>
+        prevMessages.map(msg =>
+          msg.id === botMessagePlaceholder.id
+            ? { ...msg, text: "I'm sorry, we're experiencing technical difficulties. Please try again. Details: " + error.message }
+            : msg
+        )
+      );
     } finally {
       setIsLoading(false);
     }
@@ -480,8 +523,8 @@ const ChatBot = () => {
         </ChatHeader>
         
         <ChatBody ref={chatBodyRef}>
-          {messages.map((message, index) => (
-            <Message key={index} isBot={message.isBot}>
+          {messages.map((message) => (
+            <Message key={message.id} isBot={message.isBot}>
               {message.isBot ? (
                 <ReactMarkdown>{message.text}</ReactMarkdown>
               ) : (

@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, Response
 from flask_cors import CORS
 import requests
 import json
@@ -62,18 +62,43 @@ def chat():
         }
         payload = {
             "model": "nvidia/llama-3.3-nemotron-super-49b-v1:free",
-            "messages": api_messages
+            "messages": api_messages,
+            "stream": True
         }
-        response = requests.post(
-            url="https://openrouter.ai/api/v1/chat/completions",
-            headers=headers,
-            data=json.dumps(payload)
-        )
-        if response.status_code != 200:
-            print(f"OpenRouter API error: {response.status_code} {response.text}")
-            return jsonify({"error": "OpenRouter API error", "details": response.text}), 500
-        return jsonify(response.json())
-        
+
+        def stream_response(api_messages_stream, headers_stream, payload_stream):
+            try:
+                response = requests.post(
+                    url="https://openrouter.ai/api/v1/chat/completions",
+                    headers=headers_stream,
+                    data=json.dumps(payload_stream),
+                    stream=True
+                )
+                response.raise_for_status()  # Raise an exception for bad status codes
+                for line in response.iter_lines():
+                    if line:
+                        decoded_line = line.decode('utf-8')
+                        if decoded_line.startswith('data: '):
+                            json_str = decoded_line[len('data: '):]
+                            if json_str == '[DONE]':
+                                break
+                            try:
+                                data_obj = json.loads(json_str)
+                                content = data_obj.get("choices", [{}])[0].get("delta", {}).get("content")
+                                if content:
+                                    yield f"data: {json.dumps({'token': content})}\n\n"
+                            except json.JSONDecodeError:
+                                print(f"Error decoding JSON: {json_str}")
+                                continue  # Skip malformed lines
+            except requests.exceptions.RequestException as e_req:
+                print(f"RequestException in stream_response: {str(e_req)}")
+                yield f"data: {json.dumps({'error': f'RequestException: {str(e_req)}'})}\n\n"
+            except Exception as e_stream:
+                print(f"Error in stream_response: {str(e_stream)}")
+                yield f"data: {json.dumps({'error': str(e_stream)})}\n\n"
+
+        return Response(stream_response(api_messages, headers, payload), mimetype='text/event-stream')
+
     except Exception as e:
         print(f"Error in chat endpoint: {str(e)}")
         return jsonify({"error": str(e)}), 500
