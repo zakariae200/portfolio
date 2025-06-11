@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { FaBars, FaTimes } from 'react-icons/fa';
-import CV from '../CV francais uptodate.pdf';
+import CV from '../CV anglais.pdf';
 
 const NavbarContainer = styled.nav`
   display: flex;
