@@ -61,7 +61,7 @@ def chat():
             "X-Title": SITE_NAME,
         }
         payload = {
-            "model": "nvidia/llama-3.3-nemotron-super-49b-v1:free",
+            "model": "mistralai/mistral-small-3.2-24b-instruct:free",
             "messages": api_messages
         }
         response = requests.post(

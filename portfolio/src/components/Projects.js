@@ -7,6 +7,7 @@ import codebaseGenAI from '../images/architecture/codebase gen ai.png';
 import flightFinder from '../images/architecture/FlightFinder.png';
 import hackathon from '../images/architecture/hackathon.png';
 import ragAWS from '../images/architecture/RAG-AWS.png';
+import multiAgentADK from '../images/architecture/Gcp ADK original.png';
 
 const SectionContainer = styled.section`
   padding: 5rem 10%;
@@ -495,6 +496,36 @@ const ViewButton = styled.button`
 const projectsData = [
   {
     id: 1,
+    title: "Multi-Agent System for HR Departement ",
+    description: "A sophisticated multi-agent system built with Google's Agent Development Kit (ADK) for HR departments, featuring specialized agents for CV analysis, candidate screening, and recruitment automation.",
+    image: multiAgentADK,
+    tags: ["ADK", "Multi-Agent", "Google Cloud", "RAG", "AI Agents"],
+    categories: ["GCP"],
+    fullDescription: "This architecture showcases a production-ready multi-agent system built using Google's Agent Development Kit (ADK) powered by Flash 2.0 Gemini. The system features a central OrchestratorAgent that intelligently routes user requests to specialized agents, each with focused responsibilities. The architecture integrates enterprise services including Google Cloud Storage, Vertex AI for RAG operations, PostgreSQL for data management, and Microsoft services for document processing. The system leverages bucket storage with a RAG engine to create a knowledge base that enhances agent responses with relevant context.",
+    keyFeatures: [
+      "ADK-native design with central orchestrator managing specialized agents",
+      "StorageAgent for file operations with cloud integration",
+      "CorpusAgent for RAG operations leveraging Vertex AI",
+      "PostgresAgent for comprehensive database operations",
+      "PythonAgent for code generation and data visualization",
+      "TextExtractorAgent for document processing with Microsoft integration",
+      "Enterprise-ready integration with multiple cloud services",
+      "RAG-enhanced intelligence with contextual knowledge base",
+      "Multiple output formats including visualizations and processed data"
+    ],
+    technologies: [
+      "Google Agent Development Kit (ADK)",
+      "Flash 2.0 Gemini",
+      "Google Cloud Storage",
+      "Vertex AI",
+      "PostgreSQL",
+      "Microsoft Services",
+      "RAG Engine",
+      "Plotly for Visualizations"
+    ]
+  },
+  {
+    id: 2,
     title: "AI Agent Architecture",
     description: "A sophisticated AI agent architecture designed to process user queries through a multi-step pipeline.",
     image: agentAI,
@@ -517,7 +548,7 @@ const projectsData = [
     ]
   },
   {
-    id: 2,
+    id: 3,
     title: "RAG System on Microsoft Azure",
     description: "A Retrieval-Augmented Generation system built on Microsoft Azure for document processing and intelligent search.",
     image: ragMicrosoft,
@@ -540,7 +571,7 @@ const projectsData = [
     ]
   },
   {
-    id: 3,
+    id: 4,
     title: "RAG System on AWS",
     description: "A Retrieval-Augmented Generation (RAG) system architected on AWS, featuring a secure, scalable workflow.",
     image: ragAWS,
@@ -571,7 +602,7 @@ const projectsData = [
     ]
   },
   {
-    id: 4,
+    id: 5,
     title: "Codebase Analysis & Documentation Generator",
     description: "A GenAI system that analyzes existing codebases to automatically generate retroactive documentation and functional specifications.",
     image: codebaseGenAI,
@@ -598,7 +629,7 @@ const projectsData = [
     ]
   },
   {
-    id: 5,
+    id: 6,
     title: "Flight Search Agent System",
     description: "An intelligent multi-agent flight search system that provides users with the best possible flight options.",
     image: flightFinder,
@@ -621,7 +652,7 @@ const projectsData = [
     ]
   },
   {
-    id: 6,
+    id: 7,
     title: "Multi-Agent CSV Analysis System",
     description: "A comprehensive multi-agent system for CSV data analysis with CI/CD integration and web application deployment.",
     image: hackathon,
