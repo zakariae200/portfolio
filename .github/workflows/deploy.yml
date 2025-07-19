@@ -31,20 +31,20 @@ jobs:
 
       - name: Deploy frontend to DigitalOcean
         run: |
-          rsync -avz --delete ./portfolio/build/ root@${{ secrets.DROPLET_IP }}:/var/www/portfolio/
+          rsync -avz --delete -e "ssh -o StrictHostKeyChecking=no" ./portfolio/build/ root@${{ secrets.DROPLET_IP }}:/var/www/zakariae.live/html/
 
       - name: Deploy Flask backend to DigitalOcean
         run: |
-          rsync -avz --delete ./portfolio/server/ root@${{ secrets.DROPLET_IP }}:/root/portfolio/portfolio/server/
+          rsync -avz --delete --exclude='venv/' -e "ssh -o StrictHostKeyChecking=no" ./portfolio/server/ root@${{ secrets.DROPLET_IP }}:/var/www/portfolio/portfolio/server/
 
-      - name: Install Python 3 and pip on server
+      - name: Update environment and restart services
         run: |
-          ssh root@${{ secrets.DROPLET_IP }} 'sudo apt-get update && sudo apt-get install -y python3 python3-pip python3-venv'
-
-      - name: Install Flask backend dependencies on server
-        run: |
-          ssh root@${{ secrets.DROPLET_IP }} 'cd /root/portfolio/portfolio/server && python3 -m venv venv && source venv/bin/activate && pip install -r requirements.txt'
-
-      - name: Restart Flask backend with PM2
-        run: |
-          ssh root@${{ secrets.DROPLET_IP }} "export PATH=$PATH:/root/.nvm/versions/node/v24.0.1/bin && cd /root/portfolio/portfolio/server && source venv/bin/activate && (/root/.nvm/versions/node/v24.0.1/bin/pm2 start app.py --interpreter=python3 --name flask-backend || /root/.nvm/versions/node/v24.0.1/bin/pm2 restart flask-backend)"
+          ssh -o StrictHostKeyChecking=no root@${{ secrets.DROPLET_IP }} '
+            cd /var/www/portfolio/portfolio/server &&
+            if [ ! -d "venv" ]; then python3 -m venv venv; fi &&
+            source venv/bin/activate &&
+            pip install -r requirements.txt &&
+            echo "OPENROUTER_API_KEY=${{ secrets.OPENROUTER_API_KEY }}" > .env &&
+            pm2 restart flask-backend &&
+            sudo systemctl reload nginx
+          '
