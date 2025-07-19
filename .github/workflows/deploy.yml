@@ -31,16 +31,17 @@ jobs:
 
       - name: Deploy frontend to DigitalOcean
         run: |
-          rsync -avz --delete ./portfolio/build/ root@${{ secrets.DROPLET_IP }}:/var/www/zakariae.live/html/
+          rsync -avz --delete -e "ssh -o StrictHostKeyChecking=no" ./portfolio/build/ root@${{ secrets.DROPLET_IP }}:/var/www/zakariae.live/html/
 
       - name: Deploy Flask backend to DigitalOcean
         run: |
-          rsync -avz --delete ./portfolio/server/ root@${{ secrets.DROPLET_IP }}:/var/www/portfolio/portfolio/server/
+          rsync -avz --delete --exclude='venv/' -e "ssh -o StrictHostKeyChecking=no" ./portfolio/server/ root@${{ secrets.DROPLET_IP }}:/var/www/portfolio/portfolio/server/
 
       - name: Update environment and restart services
         run: |
-          ssh root@${{ secrets.DROPLET_IP }} '
+          ssh -o StrictHostKeyChecking=no root@${{ secrets.DROPLET_IP }} '
             cd /var/www/portfolio/portfolio/server &&
+            if [ ! -d "venv" ]; then python3 -m venv venv; fi &&
             source venv/bin/activate &&
             pip install -r requirements.txt &&
             echo "OPENROUTER_API_KEY=${{ secrets.OPENROUTER_API_KEY }}" > .env &&
