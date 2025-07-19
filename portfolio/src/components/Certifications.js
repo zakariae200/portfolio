@@ -236,7 +236,7 @@ const Certifications = () => {
             </CertificationDescription>
             <CertificationFooter>
               <CertificationDate>2024</CertificationDate>
-              <VerifyButton href="#" target="_blank">
+              <VerifyButton href="https://learn.microsoft.com/api/credentials/share/en-us/zakariaeelmernissi-7076/E2FFE0AEEB70B12C?sharingId" target="_blank">
                 Verify <FaExternalLinkAlt />
               </VerifyButton>
             </CertificationFooter>
