@@ -20,15 +20,15 @@
     },
     {
       "degree": "Bachelor's in Computer Engineering",
-      "institution": "Faculté des Sciences et Techniques",
-      "location": "Tanger",
+      "institution": "Faculty of Sciences and Technologies",
+      "location": "Tangier, Morocco",
       "period": "October 2021 - July 2022",
       "description": "Comprehensive education in computer engineering principles, software development, and systems design. Developed strong foundations in programming and problem-solving."
     },
     {
-      "degree": "DEUST: Mathematics, Computer Science, Physics",
-      "institution": "Faculté des Sciences et Techniques",
-      "location": "Tanger",
+      "degree": "Diploma of Scientific and Technical University Studies (DEUST): MIP",
+      "institution": "Faculty of Sciences and Technologies",
+      "location": "Tangier, Morocco",
       "period": "September 2018 - June 2021",
       "description": "Fundamental scientific education covering mathematics, computer science, and physics. Built a strong foundation in analytical thinking and scientific methodology."
     }
@@ -38,58 +38,121 @@
       "date": "03/2024 – present",
       "title": "Data Scientist & Artificial Intelligence Engineer",
       "company": "Capgemini TS",
-      "location": "Casablanca",
+      "location": "Casablanca, Morocco",
       "details": [
-        "Membre principal du laboratoire GenAI, contribuant à la conception de solutions innovantes en intelligence artificielle générative",
-        "Développement d'une solution pour les RH, intégrant l'IA générative pour la gestion et l'interaction avec les CV",
-        "Création d'une application alimentée par l'IA pour analyser les contraintes de la chaîne d'approvisionnement internationale dans l'industrie aérospatiale"
-      ]
+        "Member of the GenAI Lab – Designing Innovative Generative AI Solutions",
+        "AI-Powered HR Platform – Intelligent CV Management System: Multi-agent GenAI solution built with Google's Agent Development Kit (ADK), Smart document parsing with entity extraction and metadata enrichment, Semantic search using vector embeddings and retrieval via Vertex AI",
+        "Supply Chain Analyzer – GenAI-Powered Logistics Intelligence System: Cloud-native GenAI system for analyzing international supply chain constraints, Document search pipeline powered by Amazon Titan and OpenSearch Service, Final AI responses generated using Claude 3.5 Sonnet via Amazon Bedrock",
+        "Computer System Validation (CSV) Platform – Pharmaceutical Industry: Multi-agent GenAI system designed for automated validation and compliance analysis in pharmaceutical environments"
+      ],
+      "techStack": "Python, GCP ADK, Gemini Flash 2.0, Vertex AI, Cloud Storage, PostgreSQL, ReactJS, AWS Bedrock, Claude 3.5 Sonnet, Amazon Titan, OpenSearch, Azure AI Services, GPT-4.1 mini, CrewAI Tools"
     },
     {
       "date": "03/2024 – 08/2024",
       "title": "Data Scientist & Artificial Intelligence Engineer (Internship)",
       "company": "Capgemini TS",
-      "location": "Casablanca",
+      "location": "Casablanca, Morocco",
       "details": [
-        "Développement d'une application de rétro-documentation de code en utilisant l'AI Generative pour améliorer la productivité des développeurs"
-      ]
+        "Codebase Analysis & Documentation Generator – Intelligent Code Understanding System: Dual-path processing system combining vector embeddings and knowledge graph construction for comprehensive codebase analysis",
+        "Automated directory and file extraction with entity identification for code components and relationships mapping",
+        "Semantic code search using Pinecone vector database for contextual code retrieval",
+        "Knowledge graph representation in Neo4j database for code relationship"
+      ],
+      "techStack": "Python, Pinecone, Neo4j, Gemini 1.5 pro, Google embeddings, Recursive chunking, Langchain"
     },
     {
       "date": "08/2023 – 09/2023",
       "title": "Data Scientist (Internship)",
       "company": "Office National des Chemins de Fer (ONCF)",
-      "location": "Rabat",
+      "location": "Rabat, Morocco",
       "details": [
-        "Analyse des données fournisseurs et articles à partir du SI Achats & Approvisionnement pour la préparation à la migration"
-      ]
+        "Data Analysis & System Migration: Analysis of supplier and item data from the Procurement Information System",
+        "ETL pipelines for migration preparation",
+        "Analytical dashboards with Python (Pandas, NumPy) for procurement insights visualization"
+      ],
+      "techStack": "Python, Pandas, NumPy, Microsoft SQL Server, Power BI"
     },
     {
       "date": "04/2022 – 06/2022",
       "title": "Full-stack Developer (Internship)",
       "company": "Société Tangéroise de Maintenance (STM)",
-      "location": "Tanger",
+      "location": "Tangier, Morocco",
       "details": [
-        "Développement d’une application web pour la réservation de taxis"
+        "Development of a web application for taxi booking"
       ]
     },
     {
       "date": "04/2021 – 06/2021",
       "title": "Intern",
       "company": "Institut National de la Recherche Agronomique",
-      "location": "Tanger",
+      "location": "Tangier, Morocco",
       "details": [
-        "Utilisation du langage de programmation MATLAB dans l'étude du comportement des chèvres"
+        "Use of MATLAB programming language in the study of goat behavior"
       ]
     },
     {
       "date": "06/2019 – 08/2019",
       "title": "Business Analyst (Seasonal)",
       "company": "M'nar Park",
-      "location": "Tanger",
+      "location": "Tangier, Morocco",
       "details": [
-        "Collecte et organisation de données multisources pour des analyses stratégiques",
-        "Élaboration de rapports et tableaux de bord optimisant les performances opérationnelles"
+        "Collection and organization of multi-source data for strategic analysis",
+        "Development of reports and dashboards optimizing operational performance"
       ]
+    }
+  ],
+  "freelanceExperience": [
+    {
+      "title": "Machine Learning Engineer",
+      "type": "Freelance",
+      "location": "Remote",
+      "project": "Personalized Learning Analytics System",
+      "details": [
+        "Built a machine learning system that analyzes student behavior on an e-learning platform",
+        "Used student onboarding forms (ILS and HEXAD) to determine learner profiles and motivations",
+        "Designed a tracking system for course progress, quiz attempts, and interactions with motivational messages",
+        "Implemented feedback loops using Like/Dislike reactions to messages, enabling adaptive encouragement strategies"
+      ],
+      "techStack": "Python, Pandas, Scikit-learn, Streamlit, SQLite, JSON, Matplotlib"
+    },
+    {
+      "title": "GenAI Engineer",
+      "type": "Freelance",
+      "location": "Remote",
+      "project": "AI Agent for Commercial Property Ownership Research",
+      "details": [
+        "Developed an intelligent AI agent system for automated commercial property ownership research and due diligence",
+        "Built multi-source data integration pipeline connecting public records, property databases, and legal document repositories",
+        "Implemented entity extraction and relationship mapping using GPT-4 for property ownership chains and corporate structures",
+        "Created automated web scraping workflows with intelligent data validation and cross-referencing capabilities"
+      ],
+      "techStack": "Python, OpenAI GPT-4, Neo4j, BeautifulSoup, LangChain, Faiss, FastAPI, PostgreSQL"
+    },
+    {
+      "title": "GenAI Engineer",
+      "type": "Freelance",
+      "location": "Remote",
+      "project": "Intelligent Book Recommendation Platform",
+      "details": [
+        "Built robust backend service architecture using Python and FastAPI for scalable recommendation engine deployment",
+        "Designed and implemented comprehensive RAG pipeline using LangChain for contextual book discovery",
+        "Integrated vector database system for efficient storage and semantic querying of book embeddings and user preferences",
+        "Developed intelligent conversational assistant using OpenAI GPT-4o with context-aware prompt engineering"
+      ],
+      "techStack": "Python, FastAPI, LangChain, OpenAI GPT-4o, Pinecone, PostgreSQL, Semantic Search, RAG Architecture"
+    },
+    {
+      "title": "GenAI Engineer",
+      "type": "Freelance",
+      "location": "Remote",
+      "project": "English Accent Analyzer",
+      "details": [
+        "Built comprehensive video-to-audio processing pipeline supporting YouTube URLs and direct video file formats",
+        "Implemented advanced audio preprocessing with noise reduction using Deep Filternet for enhanced accent detection accuracy",
+        "Integrated Wav2Vec2 transformer model via Hugging Face for sophisticated accent classification",
+        "Created confidence scoring system with AI-powered natural language explanations using OpenRouter API integration"
+      ],
+      "techStack": "Python, Streamlit, Hugging Face Transformers (Wav2Vec2), MoviePy, LibROSA, Deep Filternet, yt-dlp, OpenRouter API"
     }
   ],
   "certifications": [
@@ -103,19 +166,25 @@
       "title": "Microsoft Azure AI Fundamentals",
       "issuer": "Microsoft",
       "date": "2024",
-      "verificationLink": "#"
+      "verificationLink": "https://learn.microsoft.com/api/credentials/share/en-us/zakariaeelmernissi-7076/E2FFE0AEEB70B12C?sharingId"
     },
     {
       "title": "AWS Partner: Generative AI Essentials",
       "issuer": "Amazon Web Services",
-      "date": "2024",
+      "date": "September 2024",
       "verificationLink": "https://www.credly.com/badges/15f13f50-d7c8-4feb-9460-387e20d41502/linked_in_profile"
     },
     {
-      "title": "Google Cloud Generative AI Fundamentals",
+      "title": "Google Cloud: Generative AI",
       "issuer": "Google Cloud",
-      "date": "2024",
-      "verificationLink": "#"
+      "date": "February 2024",
+      "verificationLink": "https://partner.cloudskillsboost.google/public_profiles/1cd12157-a00d-4cf2-a725-9cec1df8d1ce/badges/8329808"
+    },
+    {
+      "title": "ALX Data Analyst",
+      "issuer": "ALX Africa",
+      "date": "February 2024",
+      "verificationLink": "https://intranet.alxswe.com/certificates/8fHNJEz5r2"
     },
     {
       "title": "EFSET English Certificate (CEFR Level C1)",
@@ -145,34 +214,78 @@
     }
   ],
   "skills": {
-    "programming": ["Python", "SQL", "JavaScript", "Reactjs"],
-    "ai_ml": ["LLMs", "RAG", "AI Agents", "TensorFlow", "PyTorch"],
-    "frameworks": ["Langchain", "Hugging Face", "OpenAI", "Langgraph","CrewAI"],
-    "cloud": ["Microsoft Azure", "AWS", "Google Cloud", "Oracle Cloud"],
-    "data": ["Big Data", "Data Analysis", "Data Visualization", "NoSQL", "RDBMS", "Vector databases"],
-    "tools": ["Pandas", "NumPy", "scikit-learn", "Keras", "Hadoop", "Spark", "Hive", "Pig"],
-    "languages": ["English (C1)", "French (Native)", "Arabic (Native)"]
+    "generativeAI": {
+      "llms": ["OpenAI GPT models", "Google Gemini", "Claude", "Mistral"],
+      "modelIntegration": ["LiteLLM", "Portkey", "OpenRouter", "Langgraph"],
+      "frameworks": ["LangChain", "Langgraph", "LlamaIndex"],
+      "multiAgentAI": ["CrewAI", "Google ADK", "Autogen", "Semantic Kernel"],
+      "vectorDatabases": ["Vertex AI Vector Search", "Pinecone", "AWS OpenSearch Service", "Weaviate", "Qdrant", "ElasticSearch", "Azure AI Search"],
+      "chunking": ["Chonkie (Framework)", "Recursive chunking", "Semantic chunking", "Context-aware"],
+      "parsing": ["Docling", "Markitdown", "Unstructured", "pdfplumber", "PyMuPDF"]
+    },
+    "cloudPlatforms": {
+      "googleCloud": ["Vertex AI", "Cloud Run", "Cloud Storage", "BigQuery", "GCP ADK"],
+      "aws": ["Bedrock", "Lambda", "API Gateway", "S3"],
+      "azure": ["AI Services", "Web Apps", "Azure OpenAI", "Azure Blob Storage"]
+    },
+    "programming": {
+      "languages": ["Python", "SQL"],
+      "apiDevelopment": ["FastAPI", "Flask"],
+      "uiFrameworks": ["Streamlit", "Gradio"],
+      "packageManagement": ["Poetry", "Virtual environments"]
+    },
+    "databases": ["MongoDB", "Neo4j", "PostgreSQL"],
+    "devOps": {
+      "cicd": ["GitLab CI/CD", "GitHub Actions"],
+      "versionControl": ["Git"],
+      "infrastructure": ["Terraform"]
+    },
+    "aiEvaluation": {
+      "frameworks": ["DeepEval", "RAGAS", "TruLens", "MLFlow"],
+      "metrics": ["Faithfulness", "Answer relevancy", "Retrieval accuracy", "Hallucination detection"]
+    },
+    "languages": ["English (Advanced - CEFR Level C1)", "French (Advanced)", "Arabic (Native)"]
   },
   "projects": [
     {
-      "title": "AI Agent Architecture",
-      "description": "A sophisticated AI agent system with processing pipelines, embeddings, and vector stores"
+      "title": "AI-Powered HR Platform – Intelligent CV Management System",
+      "description": "Multi-agent GenAI solution built with Google's Agent Development Kit (ADK). Smart document parsing with entity extraction and metadata enrichment. Semantic search using vector embeddings and retrieval via Vertex AI.",
+      "techStack": "Python, GCP ADK, Gemini Flash 2.0, Vertex AI, Cloud Storage, PostgreSQL, Markitdown, Streamlit"
     },
     {
-      "title": "RAG System on Microsoft Azure",
-      "description": "A Retrieval-Augmented Generation system built on Azure for document processing and intelligent search"
+      "title": "Supply Chain Analyzer – GenAI-Powered Logistics Intelligence System",
+      "description": "Cloud-native GenAI system for analyzing international supply chain constraints. Document search pipeline powered by Amazon Titan and OpenSearch Service. Final AI responses generated using Claude 3.5 Sonnet via Amazon Bedrock.",
+      "techStack": "ReactJS, Python, AWS Bedrock, Claude 3.5 Sonnet, Amazon Titan, OpenSearch, AWS Lambda, Amazon API Gateway, Amazon S3, CloudFront, Cognito"
+    },
+    {
+      "title": "Computer System Validation (CSV) Platform – Pharmaceutical Industry",
+      "description": "Multi-agent GenAI system designed for automated validation and compliance analysis in pharmaceutical environments. Specialized agent roles for document analysis and regulatory compliance verification.",
+      "techStack": "Python, Azure AI Services, GPT-4.1 mini, CrewAI Tools, AI Search, MarkitDown, GitHub Actions, Azure Web Apps, ReactJS"
     },
     {
       "title": "Codebase Analysis & Documentation Generator",
-      "description": "A GenAI system that analyzes existing codebases to automatically generate retroactive documentation and functional specifications"
+      "description": "Dual-path processing system combining vector embeddings and knowledge graph construction for comprehensive codebase analysis. Semantic code search using Pinecone vector database and knowledge graph representation in Neo4j.",
+      "techStack": "Python, Pinecone, Neo4j, Gemini 1.5 pro, Google embeddings, Recursive chunking, Langchain"
     },
     {
-      "title": "Flight Search Agent System",
-      "description": "An intelligent multi-agent flight search system that provides users with the best possible flight options"
+      "title": "AI Agent for Commercial Property Ownership Research",
+      "description": "Intelligent AI agent system for automated commercial property ownership research and due diligence. Multi-source data integration pipeline with entity extraction and relationship mapping using GPT-4.",
+      "techStack": "Python, OpenAI GPT-4, Neo4j, BeautifulSoup, LangChain, Faiss, FastAPI, PostgreSQL"
     },
     {
-      "title": "Multi-Agent CSV Analysis System",
-      "description": "A comprehensive multi-agent system for CSV data analysis with CI/CD integration and web application deployment"
+      "title": "Intelligent Book Recommendation Platform",
+      "description": "AI-Powered Literary Discovery System with comprehensive RAG pipeline using LangChain for contextual book discovery. Intelligent conversational assistant using OpenAI GPT-4o with context-aware prompt engineering.",
+      "techStack": "Python, FastAPI, LangChain, OpenAI GPT-4o, Pinecone, PostgreSQL, Semantic Search, RAG Architecture, Embedding Models, Microservices"
+    },
+    {
+      "title": "English Accent Analyzer",
+      "description": "AI-Powered Multilingual Audio Intelligence System with comprehensive video-to-audio processing pipeline. Advanced audio preprocessing with noise reduction using Deep Filternet for enhanced accent detection accuracy.",
+      "techStack": "Python, Streamlit, Hugging Face Transformers (Wav2Vec2), MoviePy, LibROSA, Deep Filternet, yt-dlp, OpenRouter API (Mistral)"
+    },
+    {
+      "title": "Personalized Learning Analytics System",
+      "description": "Machine learning system that analyzes student behavior on an e-learning platform. Uses student onboarding forms (ILS and HEXAD) to determine learner profiles and motivations with adaptive encouragement strategies.",
+      "techStack": "Python, Pandas, Scikit-learn, Streamlit, SQLite, JSON, Matplotlib"
     }
   ]
 }
