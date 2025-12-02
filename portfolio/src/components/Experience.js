@@ -225,9 +225,22 @@ const TimelineContent = styled.div`
   border-radius: 10px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
   transition: all 0.3s ease;
+  border: ${props => props.isNew ? '1px solid #86BC24' : 'none'};
+  background: ${props => props.isNew ? '#ffffff' : 'white'};
+  
+  &::before {
+    content: ${props => props.isNew ? "''" : 'none'};
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 5px;
+    height: 100%;
+    background: #86BC24;
+    border-radius: 10px 0 0 10px;
+  }
   
   &:hover {
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    box-shadow: ${props => props.isNew ? '0 8px 25px rgba(134, 188, 36, 0.15)' : '0 8px 25px rgba(0, 0, 0, 0.1)'};
     transform: translateY(-5px);
   }
   
@@ -269,11 +282,12 @@ const TimelineDot = styled.div`
   width: 25px;
   height: 25px;
   right: -12px;
-  background-color: white;
-  border: 4px solid #1a1a5e;
+  background-color: ${props => props.isNew ? '#86BC24' : 'white'};
+  border: 4px solid ${props => props.isNew ? '#86BC24' : '#1a1a5e'};
   top: 15px;
   border-radius: 50%;
   z-index: 1;
+  box-shadow: ${props => props.isNew ? '0 0 0 4px rgba(134, 188, 36, 0.2)' : 'none'};
   
   ${TimelineItem}:nth-child(even) & {
     left: -12px;
@@ -326,11 +340,43 @@ const TimelineDot = styled.div`
   }
 `;
 
+const NewBadge = styled.span`
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: #86BC24;
+  color: white;
+  padding: 0.35rem 0.9rem;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  margin-left: 0.8rem;
+  box-shadow: 0 2px 4px rgba(15, 11, 11, 0.15);
+  transition: all 0.3s ease;
+  
+  &:hover {
+    background: #0F0B0B;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(15, 11, 11, 0.2);
+  }
+  
+  @media (max-width: 576px) {
+    font-size: 0.65rem;
+    padding: 0.3rem 0.7rem;
+    margin-left: 0.5rem;
+  }
+`;
+
 const JobTitle = styled.h3`
   font-size: 1.2rem;
   color: #1a1a5e;
   margin-bottom: 0.5rem;
   font-weight: 600;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
   
   /* Large desktop screens */
   @media (min-width: 1600px) {
@@ -800,9 +846,24 @@ const FreelanceDescription = styled.p`
 const experienceData = [
   {
     id: 1,
+    title: 'GenAI Consultant',
+    logo: 'https://cdn.worldvectorlogo.com/logos/deloitte-1.svg',
+    date: 'December 2025 - Present',
+    location: 'Casablanca, Morocco',
+    intro: null,
+    isNew: true,
+    projects: [
+      {
+        name: 'Generative AI Consulting & Solution Design',
+        details: []
+      }
+    ]
+  },
+  {
+    id: 2,
     title: 'Data Scientist & Artificial Intelligence Engineer',
     logo: 'https://cdn.worldvectorlogo.com/logos/capgemini-201x-logo-1.svg',
-    date: 'March 2024 - Present',
+    date: 'March 2024 - December 2025',
     location: 'Casablanca, Morocco',
     intro: null,
     projects: [
@@ -835,7 +896,7 @@ const experienceData = [
     ]
   },
   {
-    id: 2,
+    id: 3,
     title: 'Data Scientist & AI Engineer · Internship',
     logo: 'https://cdn.worldvectorlogo.com/logos/capgemini-201x-logo-1.svg',
     date: 'March 2024 - August 2024',
@@ -854,7 +915,7 @@ const experienceData = [
     ]
   },
   {
-    id: 3,
+    id: 4,
     title: 'Data Scientist · Internship',
     logo: 'https://upload.wikimedia.org/wikipedia/commons/0/04/Logo-oncf.png',
     date: 'August 2023 - September 2023',
@@ -872,7 +933,7 @@ const experienceData = [
     ]
   },
   {
-    id: 4,
+    id: 5,
     title: 'Full-stack Developer · Internship',
     company: 'STM',
     logo: 'https://www.stm.ma/wp-content/uploads/2020/08/logostm.png',
@@ -887,7 +948,7 @@ const experienceData = [
     ]
   },
   {
-    id: 5,
+    id: 6,
     title: 'Research Intern',
     company: 'INRA',
     logo: 'https://www.inra.org.ma/themes/custom/inra/img/logo.png',
@@ -902,7 +963,7 @@ const experienceData = [
     ]
   },
   {
-    id: 6,
+    id: 7,
     title: 'Business Analyst · Seasonal',
     company: 'M\'nar Park',
     logo: 'https://activityz.ma/wp-content/uploads/2025/04/278668487_513777316903554_7500014128235136030_n.webp',
@@ -963,6 +1024,14 @@ const freelanceData = [
     location: 'France',
     duration: '2 months',
     description: 'Developed an AI agent system for automated candidate promotion using CrewAI and Claude Sonnet 4. Enables recruitment consultants to identify decision-makers via MCP and generate personalized outreach messages for open positions.'
+  },
+  {
+    id: 6,
+    title: 'GenAI Solutions Architect & Automation Engineer',
+    project: 'Enterprise AI Orchestration Platform',
+    location: 'Canada',
+    duration: '2 months',
+    description: 'Architected GPT Hub, a centralized AI orchestration platform with specialized agents supporting creative lifecycle workflows. Engineered intelligent automation pipelines connecting Custom GPTs to enterprise ecosystems (Notion, Zoho, Google Suite, Meta) via Make and REST APIs, automating administrative workflows and business operations.'
   }
 ];
 
@@ -1001,9 +1070,12 @@ const ProjectComponent = ({ project, index }) => {
 const ExperienceCard = ({ experience }) => {
   return (
     <TimelineItem>
-      <TimelineDot />
-      <TimelineContent>
-        <JobTitle>{experience.title}</JobTitle>
+      <TimelineDot isNew={experience.isNew} />
+      <TimelineContent isNew={experience.isNew}>
+        <JobTitle>
+          {experience.title}
+          {experience.isNew && <NewBadge>NEW</NewBadge>}
+        </JobTitle>
         <CompanyHeader>
           <CompanyLogo>
             <img src={experience.logo} alt={experience.company} />

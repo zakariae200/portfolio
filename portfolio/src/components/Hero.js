@@ -563,10 +563,10 @@ const Hero = () => {
         <Greeting>Hello, I'm</Greeting>
         <Heading>
           Zakariae El Mernissi<br />
-          <Highlight>Data Scientist & AI Engineer</Highlight>
+          <Highlight>GenAI Consultant</Highlight>
         </Heading>
         <Subheading>
-          Currently working at Capgemini TS as a Data Scientist & AI Engineer, 
+          Currently working at Deloitte as a GenAI Consultant, 
           specializing in Generative AI solutions for enterprise applications.
         </Subheading>
         <ContactInfo>
