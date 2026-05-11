@@ -1,353 +1,245 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { FaTimes } from 'react-icons/fa';
+import { X, ChevronRight } from 'lucide-react';
 
 const SectionContainer = styled.section`
-  padding: 5rem 10%;
-  background-color: #f8f9fa;
+  padding: 4rem 8% 5rem;
+  background: #ffffff;
   position: relative;
   overflow: hidden;
-  
-  &::before {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 300px;
-    height: 300px;
-    background: radial-gradient(circle, rgba(0, 184, 212, 0.05) 0%, transparent 70%);
-    z-index: 0;
-  }
-  
-  /* Large desktop screens */
-  @media (min-width: 1600px) {
-    padding: 6rem 12%;
-  }
-  
-  /* Medium desktop screens */
+
   @media (max-width: 1200px) {
-    padding: 5rem 8%;
-  }
-  
-  /* Tablets and small desktops */
-  @media (max-width: 992px) {
     padding: 4rem 6%;
   }
-  
-  /* Tablets */
+
   @media (max-width: 768px) {
-    padding: 3.5rem 5%;
+    padding: 3rem 5%;
   }
-  
-  /* Large phones */
+
   @media (max-width: 576px) {
-    padding: 3rem 4%;
-  }
-  
-  /* Small phones */
-  @media (max-width: 375px) {
-    padding: 2.5rem 3%;
+    padding: 2.5rem 4%;
   }
 `;
 
-const SectionTitle = styled.h2`
-  font-size: 2.5rem;
-  color: #1a1a5e;
-  margin-bottom: 3rem;
+const SectionHeader = styled.div`
   text-align: center;
+  margin-bottom: 4rem;
   position: relative;
-  
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80px;
-    height: 4px;
-    background: linear-gradient(to right, #1a1a5e, #00b8d4);
-    border-radius: 2px;
+  z-index: 1;
+
+  @media (max-width: 768px) {
+    margin-bottom: 3rem;
   }
-  
-  /* Large desktop screens */
-  @media (min-width: 1600px) {
-    font-size: 3rem;
-    margin-bottom: 4rem;
-    
-    &::after {
-      width: 100px;
-      height: 5px;
-      bottom: -15px;
-    }
-  }
-  
-  /* Medium desktop screens */
-  @media (max-width: 1200px) {
-    font-size: 2.3rem;
-  }
-  
-  /* Tablets */
+`;
+
+
+const SectionTitle = styled.h2`
+  font-size: 2.75rem;
+  color: #0f172a;
+  margin: 0 0 0.75rem 0;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+
   @media (max-width: 768px) {
     font-size: 2.2rem;
-    margin-bottom: 2.5rem;
   }
-  
-  /* Large phones */
+
   @media (max-width: 576px) {
-    font-size: 2rem;
-    margin-bottom: 2rem;
-  }
-  
-  /* Small phones */
-  @media (max-width: 375px) {
     font-size: 1.8rem;
-    margin-bottom: 1.8rem;
-    
-    &::after {
-      width: 60px;
-      height: 3px;
-    }
+  }
+`;
+
+const SectionSubtitle = styled.p`
+  color: #64748b;
+  font-size: 1.05rem;
+  max-width: 560px;
+  margin: 0 auto;
+  line-height: 1.6;
+
+  @media (max-width: 576px) {
+    font-size: 0.95rem;
   }
 `;
 
 const SkillsContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 2rem;
-  margin-top: 2rem;
-  
-  /* Large desktop screens */
-  @media (min-width: 1600px) {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2.5rem;
-    margin-top: 3rem;
-  }
-  
-  /* Medium desktop screens */
-  @media (max-width: 1200px) {
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 1.8rem;
-  }
-  
-  /* Tablets and small desktops */
-  @media (max-width: 992px) {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
-  }
-  
-  /* Tablets */
+  gap: 1rem;
+  max-width: 1100px;
+  margin: 0 auto;
+
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
-    gap: 1.5rem;
-    margin-top: 1.5rem;
-  }
-  
-  /* Large phones */
-  @media (max-width: 576px) {
-    gap: 1.2rem;
-  }
-  
-  /* Small phones */
-  @media (max-width: 375px) {
-    gap: 1rem;
-    margin-top: 1.2rem;
   }
 `;
 
-const SkillCategory = styled.div`
-  background-color: white;
-  border-radius: 15px;
-  padding: 2rem;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-  transition: all 0.3s ease;
+const SkillCategory = styled.button`
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: all 0.25s ease;
   cursor: pointer;
-  
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Large desktop screens */
-  @media (min-width: 1600px) {
-    padding: 2.5rem;
-    border-radius: 20px;
-  }
-  
-  /* Tablets */
-  @media (max-width: 768px) {
-    padding: 1.8rem;
-  }
-  
-  /* Large phones */
-  @media (max-width: 576px) {
-    padding: 1.5rem;
-    border-radius: 12px;
-    
-    &:hover {
-      transform: translateY(-3px);
-    }
-  }
-  
-  /* Small phones */
-  @media (max-width: 375px) {
-    padding: 1.2rem;
-    border-radius: 10px;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
-  }
-`;
-
-const CategoryHeader = styled.div`
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+  text-align: left;
+  font-family: inherit;
   display: flex;
   align-items: center;
   gap: 1rem;
-  margin-bottom: 1.5rem;
-  
-  /* Large desktop screens */
-  @media (min-width: 1600px) {
-    gap: 1.2rem;
-    margin-bottom: 1.8rem;
+  width: 100%;
+
+  &:hover {
+    border-color: rgba(0, 184, 212, 0.4);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 184, 212, 0.08);
   }
-  
-  /* Large phones */
+
+  &:hover .chevron {
+    transform: translateX(3px);
+    color: #00b8d4;
+  }
+
   @media (max-width: 576px) {
+    padding: 1.2rem;
+    border-radius: 10px;
     gap: 0.8rem;
-    margin-bottom: 1.2rem;
-  }
-  
-  /* Small phones */
-  @media (max-width: 375px) {
-    gap: 0.7rem;
-    margin-bottom: 1rem;
   }
 `;
 
 const CategoryIcon = styled.div`
-  width: 60px;
-  height: 60px;
-  border-radius: 12px;
-  background: white;
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  border-radius: 10px;
+  background: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0.5rem;
-  
+  padding: 8px;
+  border: 1px solid #e2e8f0;
+
   img {
     width: 100%;
     height: 100%;
     object-fit: contain;
   }
-  
-  /* Large desktop screens */
-  @media (min-width: 1600px) {
-    width: 70px;
-    height: 70px;
-  }
-  
-  /* Large phones */
+
   @media (max-width: 576px) {
-    width: 50px;
-    height: 50px;
+    width: 44px;
+    height: 44px;
+    padding: 6px;
   }
-  
-  /* Small phones */
-  @media (max-width: 375px) {
-    width: 45px;
-    height: 45px;
-  }
+`;
+
+const CategoryInfo = styled.div`
+  flex: 1;
+  min-width: 0;
 `;
 
 const CategoryTitle = styled.h3`
-  font-size: 1.3rem;
-  color: #1a1a5e;
-  margin: 0;
-  
-  /* Large desktop screens */
-  @media (min-width: 1600px) {
-    font-size: 1.5rem;
-  }
-  
-  /* Large phones */
+  font-size: 1.05rem;
+  color: #0f172a;
+  margin: 0 0 0.2rem 0;
+  font-weight: 600;
+  line-height: 1.3;
+
   @media (max-width: 576px) {
-    font-size: 1.2rem;
-  }
-  
-  /* Small phones */
-  @media (max-width: 375px) {
-    font-size: 1.1rem;
+    font-size: 1rem;
   }
 `;
 
-const ClickHint = styled.p`
-  text-align: center;
-  color: #666;
-  font-size: 0.85rem;
-  margin-top: 1rem;
-  font-style: italic;
+const CategoryDescription = styled.p`
+  font-size: 0.82rem;
+  color: #64748b;
+  margin: 0;
+  line-height: 1.4;
+
+  @media (max-width: 576px) {
+    font-size: 0.78rem;
+  }
+`;
+
+const Chevron = styled.span.attrs({ className: 'chevron' })`
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  color: #94a3b8;
+  transition: all 0.25s ease;
 `;
 
 const ModalOverlay = styled.div`
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.7);
+  inset: 0;
+  background: rgba(15, 23, 42, 0.55);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 1000;
   padding: 1rem;
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  animation: fadeIn 0.2s ease;
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
 `;
 
 const ModalContent = styled.div`
-  background: white;
-  border-radius: 20px;
-  padding: 2.5rem;
-  max-width: 800px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 2rem;
+  max-width: 760px;
   width: 100%;
-  max-height: 90vh;
+  max-height: 88vh;
   overflow-y: auto;
   position: relative;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-  
-  @media (max-width: 768px) {
-    padding: 2rem;
-    max-width: 95%;
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.18);
+  animation: slideUp 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
   }
-  
-  @media (max-width: 576px) {
+
+  @media (max-width: 768px) {
     padding: 1.5rem;
+  }
+
+  @media (max-width: 576px) {
+    padding: 1.25rem;
+    border-radius: 12px;
   }
 `;
 
 const CloseButton = styled.button`
   position: absolute;
-  top: 1.5rem;
-  right: 1.5rem;
-  background: #f0f0f0;
-  border: none;
+  top: 1.25rem;
+  right: 1.25rem;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
+  width: 36px;
+  height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: all 0.3s ease;
-  color: #1a1a5e;
-  font-size: 1.2rem;
-  
+  transition: all 0.25s ease;
+  color: #64748b;
+
   &:hover {
-    background: #1a1a5e;
-    color: white;
+    background: #ffffff;
+    border-color: rgba(0, 184, 212, 0.4);
+    color: #00b8d4;
     transform: rotate(90deg);
   }
-  
+
   @media (max-width: 576px) {
-    width: 35px;
-    height: 35px;
-    font-size: 1rem;
+    width: 32px;
+    height: 32px;
     top: 1rem;
     right: 1rem;
   }
@@ -356,106 +248,132 @@ const CloseButton = styled.button`
 const ModalHeader = styled.div`
   display: flex;
   align-items: center;
-  gap: 1.5rem;
-  margin-bottom: 2rem;
-  padding-bottom: 1.5rem;
-  border-bottom: 2px solid #f0f0f0;
+  gap: 1rem;
+  margin-bottom: 1.75rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid #f1f5f9;
+  padding-right: 2.5rem;
+
+  @media (max-width: 576px) {
+    gap: 0.8rem;
+  }
 `;
 
 const ModalIcon = styled.div`
-  width: 80px;
-  height: 80px;
-  border-radius: 15px;
-  background: linear-gradient(135deg, #1a1a5e, #00b8d4);
+  flex-shrink: 0;
+  width: 64px;
+  height: 64px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(0, 184, 212, 0.08) 0%, rgba(0, 184, 212, 0.02) 100%);
+  border: 1px solid rgba(0, 184, 212, 0.2);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1rem;
-  
+  padding: 12px;
+
   img {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    filter: brightness(0) invert(1);
   }
-  
+
   @media (max-width: 576px) {
-    width: 60px;
-    height: 60px;
+    width: 52px;
+    height: 52px;
+    padding: 10px;
   }
 `;
 
+const ModalTitleWrap = styled.div`
+  flex: 1;
+  min-width: 0;
+`;
+
 const ModalTitle = styled.h2`
-  font-size: 2rem;
-  color: #1a1a5e;
-  margin: 0;
-  
+  font-size: 1.5rem;
+  color: #0f172a;
+  margin: 0 0 0.25rem 0;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+
   @media (max-width: 576px) {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
+  }
+`;
+
+const ModalDescription = styled.p`
+  font-size: 0.9rem;
+  color: #64748b;
+  margin: 0;
+  line-height: 1.5;
+
+  @media (max-width: 576px) {
+    font-size: 0.85rem;
   }
 `;
 
 const FrameworksGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: 1.5rem;
-  
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 0.875rem;
+
   @media (max-width: 576px) {
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-    gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+    gap: 0.75rem;
   }
 `;
 
 const FrameworkCard = styled.div`
-  background: #f8f9fa;
-  border-radius: 12px;
-  padding: 1.5rem;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 1.1rem 0.75rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.8rem;
-  transition: all 0.3s ease;
-  border: 2px solid transparent;
-  
+  gap: 0.7rem;
+  transition: all 0.25s ease;
+
   &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-    border-color: #00b8d4;
+    transform: translateY(-2px);
+    border-color: rgba(0, 184, 212, 0.4);
+    box-shadow: 0 6px 20px rgba(0, 184, 212, 0.08);
   }
-  
+
   @media (max-width: 576px) {
-    padding: 1rem;
+    padding: 0.9rem 0.6rem;
   }
 `;
 
 const FrameworkLogo = styled.div`
-  width: 60px;
-  height: 60px;
+  width: 44px;
+  height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
-  
+
   img {
     width: 100%;
     height: 100%;
     object-fit: contain;
   }
-  
+
   @media (max-width: 576px) {
-    width: 50px;
-    height: 50px;
+    width: 38px;
+    height: 38px;
   }
 `;
 
 const FrameworkName = styled.p`
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: #1a1a5e;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: #334155;
   text-align: center;
   margin: 0;
-  
+  line-height: 1.3;
+
   @media (max-width: 576px) {
-    font-size: 0.85rem;
+    font-size: 0.78rem;
   }
 `;
 
@@ -562,17 +480,26 @@ const Skills = () => {
 
   return (
     <SectionContainer id="skills">
-      <SectionTitle>Technical Skills</SectionTitle>
+      <SectionHeader>
+        <SectionTitle>Technical Skills</SectionTitle>
+        <SectionSubtitle>
+          Frameworks, platforms, and tools I work with to build production-grade AI systems.
+        </SectionSubtitle>
+      </SectionHeader>
+
       <SkillsContainer>
         {skillsData.map((skill) => (
           <SkillCategory key={skill.id} onClick={() => openModal(skill)}>
-            <CategoryHeader>
-              <CategoryIcon>
-                <img src={skill.icon} alt={skill.title} />
-              </CategoryIcon>
+            <CategoryIcon>
+              <img src={skill.icon} alt={skill.title} />
+            </CategoryIcon>
+            <CategoryInfo>
               <CategoryTitle>{skill.title}</CategoryTitle>
-            </CategoryHeader>
-            <ClickHint>Click to see frameworks & tools</ClickHint>
+              <CategoryDescription>{skill.description}</CategoryDescription>
+            </CategoryInfo>
+            <Chevron>
+              <ChevronRight size={18} />
+            </Chevron>
           </SkillCategory>
         ))}
       </SkillsContainer>
@@ -580,19 +507,17 @@ const Skills = () => {
       {selectedSkill && (
         <ModalOverlay onClick={closeModal}>
           <ModalContent onClick={(e) => e.stopPropagation()}>
-            <CloseButton onClick={closeModal}>
-              <FaTimes />
+            <CloseButton onClick={closeModal} aria-label="Close">
+              <X size={16} />
             </CloseButton>
             <ModalHeader>
               <ModalIcon>
                 <img src={selectedSkill.icon} alt={selectedSkill.title} />
               </ModalIcon>
-              <div>
+              <ModalTitleWrap>
                 <ModalTitle>{selectedSkill.title}</ModalTitle>
-                <p style={{ color: '#666', margin: '0.5rem 0 0 0' }}>
-                  {selectedSkill.description}
-                </p>
-              </div>
+                <ModalDescription>{selectedSkill.description}</ModalDescription>
+              </ModalTitleWrap>
             </ModalHeader>
             <FrameworksGrid>
               {selectedSkill.frameworks.map((framework, index) => (

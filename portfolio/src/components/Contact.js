@@ -1,58 +1,75 @@
 import React, { useState, useRef } from 'react';
 import styled, { keyframes } from 'styled-components';
-import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaPaperPlane, FaTimes, FaCheckCircle, FaExclamationTriangle } from 'react-icons/fa';
+import { Mail, Phone, MapPin, Send, X, CheckCircle2, AlertTriangle } from 'lucide-react';
 import emailjs from '@emailjs/browser';
 import characterImage from '../images/email smile.png';
 import errorImage from '../images/error.png';
 
 const SectionContainer = styled.section`
-  padding: 5rem 10%;
-  background-color: white;
+  padding: 4rem 8% 5rem;
+  background: #ffffff;
   position: relative;
   overflow: hidden;
-  
-  &::before {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 400px;
-    height: 400px;
-    background: radial-gradient(circle, rgba(26, 26, 94, 0.03) 0%, transparent 70%);
-    z-index: 0;
+
+  @media (max-width: 1200px) {
+    padding: 4rem 6%;
   }
-  
+
   @media (max-width: 768px) {
     padding: 3rem 5%;
   }
+
+  @media (max-width: 576px) {
+    padding: 2.5rem 4%;
+  }
 `;
 
-const SectionTitle = styled.h2`
-  font-size: 2.5rem;
-  color: #1a1a5e;
-  margin-bottom: 3rem;
+const SectionHeader = styled.div`
   text-align: center;
-  position: relative;
-  
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80px;
-    height: 4px;
-    background: linear-gradient(to right, #1a1a5e, #00b8d4);
-    border-radius: 2px;
+  margin-bottom: 3rem;
+
+  @media (max-width: 768px) {
+    margin-bottom: 2.5rem;
+  }
+`;
+
+
+const SectionTitle = styled.h2`
+  font-size: 2.75rem;
+  color: #0f172a;
+  margin: 0 0 0.75rem 0;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+
+  @media (max-width: 768px) {
+    font-size: 2.2rem;
+  }
+
+  @media (max-width: 576px) {
+    font-size: 1.8rem;
+  }
+`;
+
+const SectionSubtitle = styled.p`
+  color: #64748b;
+  font-size: 1.05rem;
+  max-width: 580px;
+  margin: 0 auto;
+  line-height: 1.6;
+
+  @media (max-width: 576px) {
+    font-size: 0.95rem;
   }
 `;
 
 const ContactContainer = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3rem;
-  
-  @media (max-width: 768px) {
+  grid-template-columns: 1fr 1.4fr;
+  gap: 1.5rem;
+  max-width: 1100px;
+  margin: 0 auto;
+
+  @media (max-width: 900px) {
     grid-template-columns: 1fr;
   }
 `;
@@ -60,145 +77,192 @@ const ContactContainer = styled.div`
 const ContactInfo = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 0.75rem;
 `;
 
-const ContactCard = styled.div`
+const ContactCard = styled.a`
   display: flex;
   align-items: center;
-  gap: 1.5rem;
-  padding: 1.5rem;
-  background-color: #f8f9fa;
-  border-radius: 10px;
-  transition: all 0.3s ease;
-  
+  gap: 1rem;
+  padding: 1.1rem 1.25rem;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+
   &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+    transform: translateY(-2px);
+    border-color: rgba(0, 184, 212, 0.4);
+    box-shadow: 0 12px 28px rgba(0, 184, 212, 0.1);
   }
 `;
 
-const IconContainer = styled.div`
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #1a1a5e, #3a3a8e);
+const IconBox = styled.div`
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: rgba(0, 184, 212, 0.1);
+  border: 1px solid rgba(0, 184, 212, 0.2);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
-  font-size: 1.2rem;
-  flex-shrink: 0;
+  color: #00b8d4;
 `;
 
 const ContactDetails = styled.div`
-  display: flex;
-  flex-direction: column;
+  flex: 1;
+  min-width: 0;
 `;
 
 const ContactType = styled.h3`
-  font-size: 1.1rem;
-  color: #1a1a5e;
-  margin: 0 0 0.5rem 0;
+  font-size: 0.72rem;
+  color: #94a3b8;
+  margin: 0 0 0.25rem 0;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 `;
 
 const ContactValue = styled.p`
-  color: #666;
+  color: #0f172a;
   margin: 0;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  word-break: break-word;
 `;
 
 const ContactForm = styled.form`
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-  background-color: white;
-  border-radius: 15px;
-  padding: 2rem;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-  position: relative;
-  z-index: 1;
+  gap: 1rem;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+
+  @media (max-width: 576px) {
+    padding: 1.25rem;
+  }
+`;
+
+const FormRow = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 const FormGroup = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.4rem;
 `;
 
 const Label = styled.label`
-  font-size: 0.95rem;
-  color: #1a1a5e;
+  font-size: 0.78rem;
+  color: #64748b;
   font-weight: 500;
+  letter-spacing: 0.02em;
 `;
 
 const Input = styled.input`
-  padding: 0.8rem 1rem;
-  border: 1px solid #e0e0e0;
+  padding: 0.7rem 0.9rem;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
   border-radius: 8px;
-  font-size: 1rem;
-  transition: all 0.3s ease;
-  position: relative;
-  z-index: 2;
-  
+  font-size: 0.9rem;
+  color: #0f172a;
+  font-family: inherit;
+  transition: all 0.2s ease;
+
+  &::placeholder {
+    color: #94a3b8;
+  }
+
   &:focus {
     outline: none;
-    border-color: #1a1a5e;
-    box-shadow: 0 0 0 2px rgba(26, 26, 94, 0.1);
+    border-color: #00b8d4;
+    box-shadow: 0 0 0 3px rgba(0, 184, 212, 0.12);
   }
-  
+
   @media (max-width: 768px) {
-    font-size: 16px; /* Prevents zoom on iOS */
+    font-size: 16px;
   }
 `;
 
 const TextArea = styled.textarea`
-  padding: 0.8rem 1rem;
-  border: 1px solid #e0e0e0;
+  padding: 0.7rem 0.9rem;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
   border-radius: 8px;
-  font-size: 1rem;
-  min-height: 150px;
+  font-size: 0.9rem;
+  color: #0f172a;
+  font-family: inherit;
+  min-height: 130px;
   resize: vertical;
-  transition: all 0.3s ease;
-  position: relative;
-  z-index: 2;
-  
+  transition: all 0.2s ease;
+
+  &::placeholder {
+    color: #94a3b8;
+  }
+
   &:focus {
     outline: none;
-    border-color: #1a1a5e;
-    box-shadow: 0 0 0 2px rgba(26, 26, 94, 0.1);
+    border-color: #00b8d4;
+    box-shadow: 0 0 0 3px rgba(0, 184, 212, 0.12);
   }
-  
+
   @media (max-width: 768px) {
-    font-size: 16px; /* Prevents zoom on iOS */
+    font-size: 16px;
   }
 `;
 
 const SubmitButton = styled.button`
-  background: linear-gradient(135deg, #1a1a5e, #3a3a8e);
-  color: white;
-  border: none;
+  background: #00b8d4;
+  color: #ffffff;
+  border: 1px solid #00b8d4;
   border-radius: 8px;
-  padding: 1rem;
-  font-size: 1rem;
-  font-weight: 500;
+  padding: 0.85rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 600;
   cursor: pointer;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  transition: all 0.3s ease;
-  position: relative;
-  z-index: 2;
-  -webkit-tap-highlight-color: transparent; /* Removes tap highlight on mobile */
-  
-  &:hover {
-    background: linear-gradient(135deg, #0f0f3d, #2a2a7e);
-    transform: translateY(-2px);
+  transition: all 0.25s ease;
+  margin-top: 0.25rem;
+  -webkit-tap-highlight-color: transparent;
+
+  svg {
+    transition: transform 0.25s ease;
   }
-  
+
+  &:hover:not(:disabled) {
+    background: #0f172a;
+    border-color: #0f172a;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.15);
+  }
+
+  &:hover:not(:disabled) svg {
+    transform: translateX(2px);
+  }
+
+  &:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+  }
+
   @media (max-width: 768px) {
-    padding: 1.2rem 1rem; /* Larger touch target on mobile */
+    padding: 1rem;
   }
 `;
 
@@ -208,340 +272,141 @@ const fadeIn = keyframes`
 `;
 
 const slideUp = keyframes`
-  from { transform: translateY(30px); opacity: 0; }
+  from { transform: translateY(20px); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
 `;
 
-
-const SuccessPopupOverlay = styled.div`
+const PopupOverlay = styled.div`
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
+  inset: 0;
+  background: rgba(15, 23, 42, 0.55);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
+  padding: 1rem;
   opacity: 0;
   visibility: hidden;
-  transition: all 0.3s ease;
-  padding: 20px;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
   pointer-events: none;
-  
+
   &.active {
     opacity: 1;
     visibility: visible;
-    animation: ${fadeIn} 0.4s ease-out;
+    animation: ${fadeIn} 0.25s ease-out;
     pointer-events: auto;
   }
 `;
 
-const SuccessPopupContent = styled.div`
-  background-color: white;
-  border-radius: 20px;
+const PopupContent = styled.div`
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
   width: 100%;
-  max-width: 500px;
+  max-width: 460px;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-  text-align: center;
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.18);
   display: flex;
   flex-direction: column;
-  
+  text-align: center;
+
   .active & {
-    animation: ${slideUp} 0.5s ease-out forwards;
+    animation: ${slideUp} 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
   }
-  
+
   @media (max-width: 576px) {
-    max-width: 100%;
-    border-radius: 15px;
+    border-radius: 12px;
   }
 `;
 
 const CloseButton = styled.button`
   position: absolute;
-  top: 15px;
-  right: 15px;
-  background: transparent;
-  border: none;
-  color: #1a1a5e;
-  font-size: 1.2rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  z-index: 10;
-  padding: 8px;
+  top: 1rem;
+  right: 1rem;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
-  
+  cursor: pointer;
+  color: #64748b;
+  transition: all 0.25s ease;
+  z-index: 10;
+
   &:hover {
-    transform: scale(1.1);
-  }
-  
-  @media (max-width: 576px) {
-    top: 10px;
-    right: 10px;
-    font-size: 1rem;
-    padding: 10px;
+    background: #ffffff;
+    border-color: rgba(0, 184, 212, 0.4);
+    color: #00b8d4;
+    transform: rotate(90deg);
   }
 `;
 
-const CharacterImageContainer = styled.div`
+const PopupImage = styled.div`
   width: 100%;
-  height: 334px;
-  position: relative;
+  height: 240px;
+  background: ${props => props.bg || 'linear-gradient(135deg, #ecfeff 0%, #f0fdfa 100%)'};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid #f1f5f9;
   overflow: hidden;
-  background: linear-gradient(135deg, #e6f7ff, #ffffff);
-  
-  &::before, &::after {
-    content: '';
-    position: absolute;
-    width: 100px;
-    height: 100px;
-    background-repeat: no-repeat;
-    background-size: contain;
-    z-index: 1;
-    opacity: 0.7;
-  }
-  
-  &::before {
-    top: 20px;
-    left: 20px;
-    background-image: radial-gradient(circle, #4CAF50 10%, transparent 10%),
-                      radial-gradient(circle, #4CAF50 10%, transparent 10%);
-    background-position: 0 0, 15px 15px;
-    background-size: 30px 30px;
-  }
-  
-  &::after {
-    bottom: 20px;
-    right: 20px;
-    background-image: radial-gradient(circle, #00b8d4 10%, transparent 10%),
-                      radial-gradient(circle, #00b8d4 10%, transparent 10%);
-    background-position: 0 0, 15px 15px;
-    background-size: 30px 30px;
-  }
-  
+
   img {
-    position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
     height: 100%;
     object-fit: contain;
   }
-  
-  @media (max-width: 768px) {
-    height: 240px;
-    
-    &::before, &::after {
-      width: 70px;
-      height: 70px;
-    }
-  }
-  
+
   @media (max-width: 576px) {
     height: 200px;
-    
-    &::before, &::after {
-      width: 50px;
-      height: 50px;
-    }
   }
 `;
 
-const SuccessPopupBody = styled.div`
-  padding: 1.5rem 2rem 2rem;
-  background-color: white;
-  position: relative;
-  
-  &::before, &::after {
-    content: '';
-    position: absolute;
-    width: 30px;
-    height: 30px;
-    background-color: #28a745;
-    opacity: 0.1;
-    border-radius: 50%;
-  }
-  
-  &::before {
-    top: 15px;
-    left: 15px;
-  }
-  
-  &::after {
-    bottom: 15px;
-    right: 15px;
-  }
-  
+const PopupBody = styled.div`
+  padding: 1.5rem 1.5rem 1.75rem;
+
   @media (max-width: 576px) {
-    padding: 1.2rem 1.5rem 1.5rem;
+    padding: 1.25rem 1.25rem 1.5rem;
   }
 `;
 
-const SuccessIcon = styled.div`
-  color: #28a745;
-  font-size: 1.8rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  
-  @media (max-width: 576px) {
-    font-size: 1.6rem;
-  }
-`;
-
-const SuccessPopupTitle = styled.h3`
-  color: #1a1a5e;
-  margin: 0 0 0.5rem 0;
-  font-size: 1.8rem;
-  font-weight: 600;
-  display: flex;
+const PopupTitle = styled.h3`
+  color: #0f172a;
+  margin: 0 0 0.6rem 0;
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  line-height: 1.2;
-  
-  @media (max-width: 768px) {
-    font-size: 1.6rem;
-  }
-  
+
   @media (max-width: 576px) {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
   }
 `;
 
-const SuccessMessage = styled.p`
-  color: #666;
-  font-size: 1.1rem;
+const PopupMessage = styled.p`
+  color: #64748b;
+  font-size: 0.9rem;
   line-height: 1.6;
   margin: 0;
-  position: relative;
-  display: inline-block;
-  
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 50px;
-    height: 2px;
-    background: linear-gradient(to right, #1a1a5e, #28a745);
-    border-radius: 2px;
-  }
-  
-  @media (max-width: 768px) {
-    font-size: 1.05rem;
-  }
-  
+
   @media (max-width: 576px) {
-    font-size: 1rem;
-    line-height: 1.5;
+    font-size: 0.85rem;
   }
 `;
 
-
-
-
-
-const ErrorPopupOverlay = styled(SuccessPopupOverlay)``;  // Inherits from SuccessPopupOverlay
-
-const ErrorPopupContent = styled(SuccessPopupContent)``;  // Inherits from SuccessPopupContent
-
-const ErrorImageContainer = styled.div`
-  width: 100%;
-  height: 334px;
-  position: relative;
-  overflow: hidden;
-  background: linear-gradient(135deg, #fff0f0, #ffffff);
-  
-  &::before, &::after {
-    content: '';
-    position: absolute;
-    width: 100px;
-    height: 100px;
-    background-repeat: no-repeat;
-    background-size: contain;
-    z-index: 1;
-    opacity: 0.7;
-  }
-  
-  &::before {
-    top: 20px;
-    left: 20px;
-    background-image: radial-gradient(circle, #dc3545 10%, transparent 10%),
-                      radial-gradient(circle, #dc3545 10%, transparent 10%);
-    background-position: 0 0, 15px 15px;
-    background-size: 30px 30px;
-  }
-  
-  &::after {
-    bottom: 20px;
-    right: 20px;
-    background-image: radial-gradient(circle, #dc3545 10%, transparent 10%),
-                      radial-gradient(circle, #dc3545 10%, transparent 10%);
-    background-position: 0 0, 15px 15px;
-    background-size: 30px 30px;
-  }
-  
-  img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-  }
-  
-  @media (max-width: 768px) {
-    height: 240px;
-    
-    &::before, &::after {
-      width: 70px;
-      height: 70px;
-    }
-  }
-  
-  @media (max-width: 576px) {
-    height: 200px;
-    
-    &::before, &::after {
-      width: 50px;
-      height: 50px;
-    }
-  }
-`;
-
-const ErrorPopupBody = styled(SuccessPopupBody)`
-  &::before, &::after {
-    background-color: #dc3545;
-  }
-`;
-
-const ErrorIcon = styled.div`
-  color: #dc3545;
-  font-size: 1.8rem;
-  display: flex;
+const StatusIcon = styled.span`
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  
-  @media (max-width: 576px) {
-    font-size: 1.6rem;
-  }
-`;
-
-const ErrorPopupTitle = styled(SuccessPopupTitle)`
-  color: #dc3545;
-`;
-
-const ErrorMessage = styled(SuccessMessage)`
-  &::after {
-    background: linear-gradient(to right, #dc3545, #ff6b6b);
-  }
+  color: ${props => props.color};
 `;
 
 
@@ -633,94 +498,110 @@ const Contact = () => {
 
   return (
     <SectionContainer id="contact">
-      <SectionTitle>Get In Touch</SectionTitle>
+      <SectionHeader>
+        <SectionTitle>Get In Touch</SectionTitle>
+        <SectionSubtitle>
+          Have a project in mind, want to collaborate, or just say hello? My inbox is always open.
+        </SectionSubtitle>
+      </SectionHeader>
+
       <ContactContainer>
         <ContactInfo>
-          <ContactCard>
-            <IconContainer>
-              <FaEnvelope />
-            </IconContainer>
+          <ContactCard href="mailto:zakariaeelmernissi@gmail.com">
+            <IconBox>
+              <Mail size={18} />
+            </IconBox>
             <ContactDetails>
               <ContactType>Email</ContactType>
               <ContactValue>zakariaeelmernissi@gmail.com</ContactValue>
             </ContactDetails>
           </ContactCard>
-          
-          <ContactCard>
-            <IconContainer>
-              <FaPhone />
-            </IconContainer>
+
+          <ContactCard href="tel:+212636363170">
+            <IconBox>
+              <Phone size={18} />
+            </IconBox>
             <ContactDetails>
               <ContactType>Phone</ContactType>
               <ContactValue>+212 636363170</ContactValue>
             </ContactDetails>
           </ContactCard>
-          
-          <ContactCard>
-            <IconContainer>
-              <FaMapMarkerAlt />
-            </IconContainer>
+
+          <ContactCard
+            href="https://maps.google.com/?q=Casablanca,Morocco"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <IconBox>
+              <MapPin size={18} />
+            </IconBox>
             <ContactDetails>
               <ContactType>Location</ContactType>
               <ContactValue>Casablanca, Morocco</ContactValue>
             </ContactDetails>
           </ContactCard>
         </ContactInfo>
-        
+
         <ContactForm ref={formRef} onSubmit={handleSubmit}>
-          <FormGroup>
-            <Label htmlFor="name">Your Name</Label>
-            <Input 
-              type="text" 
-              id="name" 
-              name="name" 
-              value={formData.name} 
-              onChange={handleChange} 
-              required 
-            />
-          </FormGroup>
-          
-          <FormGroup>
-            <Label htmlFor="email">Your Email</Label>
-            <Input 
-              type="email" 
-              id="email" 
-              name="email" 
-              value={formData.email} 
-              onChange={handleChange} 
-              required 
-            />
-          </FormGroup>
-          
+          <FormRow>
+            <FormGroup>
+              <Label htmlFor="name">Your Name</Label>
+              <Input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="John Doe"
+                value={formData.name}
+                onChange={handleChange}
+                required
+              />
+            </FormGroup>
+
+            <FormGroup>
+              <Label htmlFor="email">Your Email</Label>
+              <Input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="john@example.com"
+                value={formData.email}
+                onChange={handleChange}
+                required
+              />
+            </FormGroup>
+          </FormRow>
+
           <FormGroup>
             <Label htmlFor="subject">Subject</Label>
-            <Input 
-              type="text" 
-              id="subject" 
-              name="subject" 
-              value={formData.subject} 
-              onChange={handleChange} 
-              required 
+            <Input
+              type="text"
+              id="subject"
+              name="subject"
+              placeholder="What's this about?"
+              value={formData.subject}
+              onChange={handleChange}
+              required
             />
           </FormGroup>
-          
+
           <FormGroup>
             <Label htmlFor="message">Message</Label>
-            <TextArea 
-              id="message" 
-              name="message" 
-              value={formData.message} 
-              onChange={handleChange} 
-              required 
+            <TextArea
+              id="message"
+              name="message"
+              placeholder="Tell me about your idea..."
+              value={formData.message}
+              onChange={handleChange}
+              required
             />
           </FormGroup>
-          
+
           <SubmitButton type="submit" disabled={loading}>
-            {loading ? 'Sending...' : 'Send Message'} <FaPaperPlane />
+            {loading ? 'Sending...' : 'Send Message'} <Send size={15} />
           </SubmitButton>
-          
+
           {/* Success Popup */}
-          <SuccessPopupOverlay 
+          <PopupOverlay
             className={showSuccessPopup ? 'active' : ''}
             onClick={(e) => {
               if (e.target === e.currentTarget) {
@@ -729,31 +610,31 @@ const Contact = () => {
               }
             }}
           >
-            <SuccessPopupContent>
+            <PopupContent>
               <CloseButton onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
                 setShowSuccessPopup(false);
               }}>
-                <FaTimes />
+                <X size={14} />
               </CloseButton>
-              <CharacterImageContainer>
+              <PopupImage bg="linear-gradient(135deg, #ecfeff 0%, #f0fdfa 100%)">
                 <img src={characterImage} alt="Message Sent" />
-              </CharacterImageContainer>
-              <SuccessPopupBody>
-                <SuccessPopupTitle>
-                  <SuccessIcon><FaCheckCircle /></SuccessIcon>
-                  <span>Message Received!</span>
-                </SuccessPopupTitle>
-                <SuccessMessage>
+              </PopupImage>
+              <PopupBody>
+                <PopupTitle>
+                  <StatusIcon color="#10b981"><CheckCircle2 size={22} /></StatusIcon>
+                  Message Received!
+                </PopupTitle>
+                <PopupMessage>
                   Thank you for reaching out. I'll get back to you as soon as possible.
-                </SuccessMessage>
-              </SuccessPopupBody>
-            </SuccessPopupContent>
-          </SuccessPopupOverlay>
-          
+                </PopupMessage>
+              </PopupBody>
+            </PopupContent>
+          </PopupOverlay>
+
           {/* Error Popup */}
-          <ErrorPopupOverlay 
+          <PopupOverlay
             className={showErrorPopup ? 'active' : ''}
             onClick={(e) => {
               if (e.target === e.currentTarget) {
@@ -762,28 +643,28 @@ const Contact = () => {
               }
             }}
           >
-            <ErrorPopupContent>
+            <PopupContent>
               <CloseButton onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
                 setShowErrorPopup(false);
               }}>
-                <FaTimes />
+                <X size={14} />
               </CloseButton>
-              <ErrorImageContainer>
+              <PopupImage bg="linear-gradient(135deg, #fef2f2 0%, #fff5f5 100%)">
                 <img src={errorImage} alt="Error Occurred" />
-              </ErrorImageContainer>
-              <ErrorPopupBody>
-                <ErrorPopupTitle>
-                  <ErrorIcon><FaExclamationTriangle /></ErrorIcon>
-                  <span>Message Failed!</span>
-                </ErrorPopupTitle>
-                <ErrorMessage>
+              </PopupImage>
+              <PopupBody>
+                <PopupTitle>
+                  <StatusIcon color="#dc2626"><AlertTriangle size={22} /></StatusIcon>
+                  Message Failed
+                </PopupTitle>
+                <PopupMessage>
                   There was a problem sending your message. Please try again later or contact me directly via email.
-                </ErrorMessage>
-              </ErrorPopupBody>
-            </ErrorPopupContent>
-          </ErrorPopupOverlay>
+                </PopupMessage>
+              </PopupBody>
+            </PopupContent>
+          </PopupOverlay>
         </ContactForm>
       </ContactContainer>
     </SectionContainer>

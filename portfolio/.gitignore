@@ -26,3 +26,16 @@ yarn-error.log*
 github-actions-key
 github-actions-key.pub
 
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+venv/
+*.egg-info/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+

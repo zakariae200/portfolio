@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
-import { FaArrowRight, FaTimes, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import { ArrowRight, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import agentAI from '../images/architecture/Agent AI.png';
 import ragMicrosoft from '../images/architecture/RAG-Microsoft Azure.png';
 import codebaseGenAI from '../images/architecture/codebase gen ai.png';
@@ -10,99 +10,99 @@ import ragAWS from '../images/architecture/RAG-AWS.png';
 import multiAgentADK from '../images/architecture/Gcp ADK original.png';
 
 const SectionContainer = styled.section`
-  padding: 5rem 10%;
-  background-color: #f8f9fa;
+  padding: 4rem 8% 5rem;
+  background: #ffffff;
   position: relative;
   overflow: hidden;
-  
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 300px;
-    height: 300px;
-    background: radial-gradient(circle, rgba(26, 26, 94, 0.03) 0%, transparent 70%);
-    z-index: 0;
+
+  @media (max-width: 1200px) {
+    padding: 4rem 6%;
   }
-  
-  @media (max-width: 1024px) {
-    padding: 4rem 5%;
-  }
-  
+
   @media (max-width: 768px) {
     padding: 3rem 5%;
   }
-  
-  @media (max-width: 480px) {
-    padding: 2.5rem 1rem;
+
+  @media (max-width: 576px) {
+    padding: 2.5rem 4%;
   }
 `;
 
-const SectionTitle = styled.h2`
-  font-size: 2.5rem;
-  color: #1a1a5e;
-  margin-bottom: 1.5rem;
+const SectionHeader = styled.div`
   text-align: center;
+  margin-bottom: 3rem;
   position: relative;
-  
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80px;
-    height: 4px;
-    background: linear-gradient(to right, #1a1a5e, #00b8d4);
-    border-radius: 2px;
-  }
-  
+  z-index: 1;
+
   @media (max-width: 768px) {
-    font-size: 2rem;
-    margin-bottom: 1.2rem;
+    margin-bottom: 2.5rem;
   }
-  
-  @media (max-width: 480px) {
+`;
+
+
+const SectionTitle = styled.h2`
+  font-size: 2.75rem;
+  color: #0f172a;
+  margin: 0 0 0.75rem 0;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+
+  @media (max-width: 768px) {
+    font-size: 2.2rem;
+  }
+
+  @media (max-width: 576px) {
     font-size: 1.8rem;
+  }
+`;
+
+const SectionSubtitle = styled.p`
+  color: #64748b;
+  font-size: 1.05rem;
+  max-width: 580px;
+  margin: 0 auto;
+  line-height: 1.6;
+
+  @media (max-width: 576px) {
+    font-size: 0.95rem;
   }
 `;
 
 const FilterContainer = styled.div`
   display: flex;
   justify-content: center;
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
   flex-wrap: wrap;
   gap: 0.5rem;
-  
+
   @media (max-width: 480px) {
-    gap: 0.3rem;
-    margin-bottom: 1.5rem;
+    gap: 0.4rem;
+    margin-bottom: 2rem;
   }
 `;
 
 const FilterButton = styled.button`
-  background-color: ${props => props.active ? '#1a1a5e' : 'white'};
-  color: ${props => props.active ? 'white' : '#1a1a5e'};
-  border: 1px solid #1a1a5e;
+  background: ${props => props.active ? '#00b8d4' : '#ffffff'};
+  color: ${props => props.active ? '#ffffff' : '#334155'};
+  border: 1px solid ${props => props.active ? '#00b8d4' : '#e2e8f0'};
   border-radius: 50px;
-  padding: 0.5rem 1.2rem;
+  padding: 0.5rem 1.1rem;
+  font-size: 0.85rem;
   font-weight: 500;
   cursor: pointer;
-  transition: all 0.3s ease;
-  
+  transition: all 0.25s ease;
+  font-family: inherit;
+  box-shadow: ${props => props.active ? '0 4px 12px rgba(0, 184, 212, 0.25)' : '0 1px 2px rgba(15, 23, 42, 0.04)'};
+
   &:hover {
-    background-color: ${props => props.active ? '#1a1a5e' : 'rgba(26, 26, 94, 0.1)'};
+    border-color: ${props => props.active ? '#00b8d4' : 'rgba(0, 184, 212, 0.4)'};
+    color: ${props => props.active ? '#ffffff' : '#0f172a'};
+    transform: translateY(-1px);
   }
-  
-  @media (max-width: 768px) {
-    padding: 0.4rem 1rem;
-    font-size: 0.9rem;
-  }
-  
+
   @media (max-width: 480px) {
-    padding: 0.3rem 0.8rem;
-    font-size: 0.8rem;
+    padding: 0.4rem 0.9rem;
+    font-size: 0.78rem;
   }
 `;
 
@@ -116,18 +116,14 @@ const ProjectsContainer = styled.div`
 
 const ProjectsGrid = styled.div`
   display: flex;
-  gap: 2rem;
+  gap: 1.25rem;
   transition: transform ${props => props.isDragging ? '0s' : '0.5s cubic-bezier(0.25, 1, 0.5, 1)'};
   transform: translateX(${props => props.slidePosition}px);
   width: max-content;
   will-change: transform;
-  
+
   @media (max-width: 768px) {
     gap: 1rem;
-  }
-  
-  @media (max-width: 480px) {
-    gap: 0.8rem;
   }
 `;
 
@@ -136,58 +132,64 @@ const SlideButton = styled.button`
   top: 50%;
   transform: translateY(-50%);
   z-index: 10;
-  background-color: rgba(255, 255, 255, 0.8);
-  border: none;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
+  width: 42px;
+  height: 42px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
-  ${props => props.direction === 'left' ? 'left: 10px;' : 'right: 10px;'}
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.08);
+  transition: all 0.25s ease;
+  color: #334155;
+  ${props => props.direction === 'left' ? 'left: 8px;' : 'right: 8px;'}
   opacity: ${props => props.visible ? '1' : '0'};
   visibility: ${props => props.visible ? 'visible' : 'hidden'};
-  
+
   &:hover {
-    background-color: white;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border-color: rgba(0, 184, 212, 0.4);
+    color: #00b8d4;
+    box-shadow: 0 6px 20px rgba(0, 184, 212, 0.15);
   }
-  
+
   @media (max-width: 768px) {
-    width: 35px;
-    height: 35px;
+    width: 36px;
+    height: 36px;
   }
-  
+
   @media (max-width: 480px) {
-    width: 30px;
-    height: 30px;
-    ${props => props.direction === 'left' ? 'left: 5px;' : 'right: 5px;'}
+    width: 32px;
+    height: 32px;
+    ${props => props.direction === 'left' ? 'left: 4px;' : 'right: 4px;'}
   }
 `;
 
 const ProjectCard = styled.div`
-  background-color: white;
-  border-radius: 15px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-  transition: all 0.3s ease;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+  transition: all 0.25s ease;
   cursor: pointer;
-  min-width: 350px;
-  max-width: 350px;
-  
+  min-width: 340px;
+  max-width: 340px;
+  display: flex;
+  flex-direction: column;
+
   &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    transform: translateY(-3px);
+    border-color: rgba(0, 184, 212, 0.4);
+    box-shadow: 0 12px 28px rgba(0, 184, 212, 0.12);
   }
-  
+
   @media (max-width: 768px) {
     min-width: 300px;
     max-width: 300px;
   }
-  
+
   @media (max-width: 480px) {
     min-width: 260px;
     max-width: 260px;
@@ -195,22 +197,14 @@ const ProjectCard = styled.div`
 `;
 
 const ProjectImageContainer = styled.div`
-  height: 200px;
+  height: 180px;
   overflow: hidden;
   position: relative;
-  
-  &::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(to bottom, rgba(26, 26, 94, 0.1), rgba(26, 26, 94, 0.4));
-  }
-  
+  background: #f8fafc;
+  border-bottom: 1px solid #f1f5f9;
+
   @media (max-width: 480px) {
-    height: 180px;
+    height: 160px;
   }
 `;
 
@@ -219,227 +213,229 @@ const ProjectImg = styled.img`
   height: 100%;
   object-fit: cover;
   object-position: top;
-  transition: transform 0.5s ease;
-  
+  transition: transform 0.4s ease;
+
   ${ProjectCard}:hover & {
-    transform: scale(1.05);
+    transform: scale(1.04);
   }
 `;
 
 const ProjectContent = styled.div`
-  padding: 1.5rem;
-  
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+
   @media (max-width: 480px) {
     padding: 1rem;
   }
 `;
 
 const ProjectTitle = styled.h3`
-  font-size: 1.3rem;
-  color: #1a1a5e;
+  font-size: 1.05rem;
+  color: #0f172a;
   margin: 0 0 0.5rem 0;
-  
+  font-weight: 600;
+  line-height: 1.35;
+
   @media (max-width: 480px) {
-    font-size: 1.1rem;
+    font-size: 1rem;
   }
 `;
 
 const ProjectDescription = styled.p`
-  color: #666;
-  font-size: 0.95rem;
-  line-height: 1.5;
+  color: #64748b;
+  font-size: 0.85rem;
+  line-height: 1.55;
   margin: 0 0 1rem 0;
-  
+
   @media (max-width: 480px) {
-    font-size: 0.85rem;
-    margin: 0 0 0.8rem 0;
+    font-size: 0.82rem;
   }
 `;
 
 const ProjectTags = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
-  
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+
   @media (max-width: 480px) {
     gap: 0.3rem;
   }
 `;
 
 const ProjectTag = styled.span`
-  background-color: #f0f0f0;
-  color: #1a1a5e;
-  padding: 0.3rem 0.6rem;
+  background: rgba(0, 184, 212, 0.08);
+  color: #00b8d4;
+  padding: 0.25rem 0.6rem;
   border-radius: 50px;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   font-weight: 500;
-  
+  border: 1px solid rgba(0, 184, 212, 0.18);
+
   @media (max-width: 480px) {
-    padding: 0.2rem 0.5rem;
-    font-size: 0.7rem;
+    font-size: 0.68rem;
   }
 `;
 
 const Modal = styled.div`
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
+  inset: 0;
+  background: rgba(15, 23, 42, 0.55);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 1001;
+  padding: 1rem;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   opacity: ${props => props.isOpen ? '1' : '0'};
   visibility: ${props => props.isOpen ? 'visible' : 'hidden'};
-  transition: all 0.3s ease;
+  transition: all 0.25s ease;
 `;
 
 const ModalContent = styled.div`
-  background-color: white;
-  border-radius: 15px;
-  width: 80%;
-  max-width: 900px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 880px;
   max-height: 90vh;
   overflow-y: auto;
   position: relative;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-  
-  @media (max-width: 768px) {
-    width: 90%;
-  }
-  
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.18);
+
   @media (max-width: 480px) {
     width: 95%;
-    border-radius: 10px;
+    border-radius: 12px;
   }
-  
-  /* Scrollbar styling */
+
   &::-webkit-scrollbar {
-    width: 8px;
+    width: 6px;
   }
-  
+
   &::-webkit-scrollbar-track {
-    background: #f1f1f1;
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #e2e8f0;
     border-radius: 10px;
   }
-  
-  &::-webkit-scrollbar-thumb {
-    background: #1a1a5e;
-    border-radius: 10px;
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: #cbd5e1;
   }
 `;
 
 const ModalCloseButton = styled.button`
   position: absolute;
-  top: 15px;
-  right: 15px;
-  background: rgba(255, 255, 255, 0.8);
-  border: none;
+  top: 1rem;
+  right: 1rem;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  border: 1px solid #e2e8f0;
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
+  width: 36px;
+  height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  font-size: 1.2rem;
-  color: #1a1a5e;
+  color: #64748b;
   z-index: 10;
-  transition: all 0.3s ease;
-  
+  transition: all 0.25s ease;
+
   &:hover {
-    background-color: white;
-    transform: scale(1.1);
+    background: #ffffff;
+    border-color: rgba(0, 184, 212, 0.4);
+    color: #00b8d4;
+    transform: rotate(90deg);
   }
-  
+
   @media (max-width: 480px) {
-    width: 35px;
-    height: 35px;
-    top: 10px;
-    right: 10px;
-    font-size: 1rem;
+    width: 32px;
+    height: 32px;
   }
 `;
 
 const ModalImage = styled.img`
   width: 100%;
-  max-height: 500px;
+  max-height: 480px;
   object-fit: contain;
-  border-top-left-radius: 15px;
-  border-top-right-radius: 15px;
-  
+  background: #f8fafc;
+  border-bottom: 1px solid #f1f5f9;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+
   @media (max-width: 768px) {
-    max-height: 400px;
+    max-height: 380px;
   }
-  
+
   @media (max-width: 480px) {
-    max-height: 300px;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+    max-height: 280px;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
   }
 `;
 
 const ModalBody = styled.div`
-  padding: 2rem;
-  
+  padding: 1.75rem;
+
   @media (max-width: 768px) {
     padding: 1.5rem;
   }
-  
+
   @media (max-width: 480px) {
-    padding: 1rem;
+    padding: 1.25rem;
   }
 `;
 
 const ModalTitle = styled.h2`
-  font-size: 2rem;
-  color: #1a1a5e;
-  margin: 0 0 1rem 0;
-  
-  @media (max-width: 768px) {
-    font-size: 1.8rem;
-  }
-  
+  font-size: 1.5rem;
+  color: #0f172a;
+  margin: 0 0 0.75rem 0;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+
   @media (max-width: 480px) {
-    font-size: 1.5rem;
-    margin: 0 0 0.8rem 0;
+    font-size: 1.25rem;
   }
 `;
 
 const ModalDescription = styled.p`
-  color: #444;
-  font-size: 1.1rem;
+  color: #475569;
+  font-size: 0.95rem;
   line-height: 1.6;
   margin-bottom: 1.5rem;
-  
-  @media (max-width: 768px) {
-    font-size: 1rem;
-  }
-  
+
   @media (max-width: 480px) {
-    font-size: 0.9rem;
-    margin-bottom: 1rem;
+    font-size: 0.88rem;
   }
 `;
 
 const ProjectDetails = styled.div`
-  margin-top: 2rem;
-  
-  @media (max-width: 480px) {
-    margin-top: 1.5rem;
-  }
+  margin-top: 1.75rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #f1f5f9;
 `;
 
 const DetailTitle = styled.h3`
-  font-size: 1.3rem;
-  color: #1a1a5e;
+  font-size: 1rem;
+  color: #0f172a;
   margin: 0 0 1rem 0;
-  
-  @media (max-width: 480px) {
-    font-size: 1.1rem;
-    margin: 0 0 0.8rem 0;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  &::before {
+    content: '';
+    width: 3px;
+    height: 16px;
+    background: #00b8d4;
+    border-radius: 2px;
   }
 `;
 
@@ -447,49 +443,58 @@ const DetailsList = styled.ul`
   list-style-type: none;
   padding: 0;
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 `;
 
 const DetailItem = styled.li`
-  margin-bottom: 0.8rem;
   position: relative;
-  padding-left: 1.5rem;
-  line-height: 1.5;
-  
+  padding-left: 1.25rem;
+  line-height: 1.55;
+  font-size: 0.9rem;
+  color: #475569;
+
   &::before {
-    content: '•';
-    color: #00b8d4;
-    font-weight: bold;
+    content: '';
     position: absolute;
     left: 0;
+    top: 0.65rem;
+    width: 6px;
+    height: 1px;
+    background: rgba(0, 184, 212, 0.6);
   }
-  
+
   @media (max-width: 480px) {
-    margin-bottom: 0.6rem;
-    font-size: 0.9rem;
-    padding-left: 1.2rem;
+    font-size: 0.85rem;
   }
 `;
 
 const ViewButton = styled.button`
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.4rem;
   background: none;
   border: none;
   color: #00b8d4;
   font-weight: 500;
+  font-size: 0.85rem;
   padding: 0;
-  margin-top: 1rem;
+  margin-top: auto;
   cursor: pointer;
-  transition: all 0.3s ease;
-  
-  &:hover {
-    color: #1a1a5e;
+  transition: color 0.25s ease;
+  font-family: inherit;
+
+  svg {
+    transition: transform 0.25s ease;
   }
-  
-  @media (max-width: 480px) {
-    font-size: 0.9rem;
-    margin-top: 0.8rem;
+
+  &:hover {
+    color: #0f172a;
+
+    svg {
+      transform: translateX(3px);
+    }
   }
 `;
 
@@ -910,56 +915,41 @@ const Projects = () => {
     };
   }, []);
   
+  const filters = ['All', 'Microsoft Azure', 'AWS', 'GCP', 'Open Source'];
+
   return (
     <SectionContainer id="projects">
-      <SectionTitle>Projects & Architectures</SectionTitle>
-      
+      <SectionHeader>
+        <SectionTitle>Projects & Architectures</SectionTitle>
+        <SectionSubtitle>
+          End-to-end AI systems and cloud architectures designed and shipped across enterprise environments.
+        </SectionSubtitle>
+      </SectionHeader>
+
       <FilterContainer>
-        <FilterButton 
-          active={activeFilter === 'All'} 
-          onClick={() => handleFilterClick('All')}
-        >
-          All
-        </FilterButton>
-        <FilterButton 
-          active={activeFilter === 'Microsoft Azure'} 
-          onClick={() => handleFilterClick('Microsoft Azure')}
-        >
-          Microsoft Azure
-        </FilterButton>
-        <FilterButton 
-          active={activeFilter === 'AWS'} 
-          onClick={() => handleFilterClick('AWS')}
-        >
-          AWS
-        </FilterButton>
-        <FilterButton 
-          active={activeFilter === 'GCP'} 
-          onClick={() => handleFilterClick('GCP')}
-        >
-          GCP
-        </FilterButton>
-        <FilterButton 
-          active={activeFilter === 'Open Source'} 
-          onClick={() => handleFilterClick('Open Source')}
-        >
-          Open Source
-        </FilterButton>
+        {filters.map(filter => (
+          <FilterButton
+            key={filter}
+            active={activeFilter === filter}
+            onClick={() => handleFilterClick(filter)}
+          >
+            {filter}
+          </FilterButton>
+        ))}
       </FilterContainer>
-      
-      <ProjectsContainer 
-        ref={containerRef}
-      >
-        <SlideButton 
-          direction="left" 
+
+      <ProjectsContainer ref={containerRef}>
+        <SlideButton
+          direction="left"
           onClick={slideLeft}
           visible={canSlideLeft}
+          aria-label="Previous"
         >
-          <FaChevronLeft />
+          <ChevronLeft size={18} />
         </SlideButton>
-        
-        <ProjectsGrid 
-          ref={projectsGridRef} 
+
+        <ProjectsGrid
+          ref={projectsGridRef}
           slidePosition={slidePosition}
           isDragging={isDragging}
           onMouseDown={handleMouseDown}
@@ -985,35 +975,36 @@ const Projects = () => {
                   ))}
                 </ProjectTags>
                 <ViewButton>
-                  View Architecture <FaArrowRight />
+                  View Architecture <ArrowRight size={14} />
                 </ViewButton>
               </ProjectContent>
             </ProjectCard>
           ))}
         </ProjectsGrid>
-        
-        <SlideButton 
-          direction="right" 
+
+        <SlideButton
+          direction="right"
           onClick={slideRight}
           visible={canSlideRight}
+          aria-label="Next"
         >
-          <FaChevronRight />
+          <ChevronRight size={18} />
         </SlideButton>
       </ProjectsContainer>
-      
+
       <Modal isOpen={isModalOpen} onClick={closeProjectModal}>
         <ModalContent onClick={e => e.stopPropagation()}>
-          <ModalCloseButton onClick={closeProjectModal}>
-            <FaTimes />
+          <ModalCloseButton onClick={closeProjectModal} aria-label="Close">
+            <X size={16} />
           </ModalCloseButton>
-          
+
           {selectedProject && (
             <>
               <ModalImage src={selectedProject.image} alt={selectedProject.title} />
               <ModalBody>
                 <ModalTitle>{selectedProject.title}</ModalTitle>
                 <ModalDescription>{selectedProject.fullDescription}</ModalDescription>
-                
+
                 <ProjectDetails>
                   <DetailTitle>Key Features</DetailTitle>
                   <DetailsList>
@@ -1022,7 +1013,7 @@ const Projects = () => {
                     ))}
                   </DetailsList>
                 </ProjectDetails>
-                
+
                 <ProjectDetails>
                   <DetailTitle>Technologies Used</DetailTitle>
                   <DetailsList>

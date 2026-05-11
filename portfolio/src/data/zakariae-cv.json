@@ -1,8 +1,8 @@
 {
   "personalInfo": {
     "name": "Zakariae El Mernissi",
-    "title": "Data Scientist & AI Engineer",
-    "company": "Capgemini TS",
+    "title": "GenAI Consultant & Engineer",
+    "company": "Deloitte",
     "email": "zakariaeelmernissi@gmail.com",
     "phone": "+212 636363170",
     "dateOfBirth": "08/08/2000",
@@ -35,30 +35,29 @@
   ],
   "experience": [
     {
-      "date": "03/2024 – present",
-      "title": "Data Scientist & Artificial Intelligence Engineer",
-      "company": "Capgemini TS",
-      "location": "Casablanca, Morocco",
+      "date": "12/2025 – Present",
+      "title": "GenAI Consultant",
+      "company": "Deloitte",
+      "location": "Casablanca (Client: Technip Energies)",
       "details": [
-        "Member of the GenAI Lab – Designing Innovative Generative AI Solutions",
-        "AI-Powered HR Platform – Intelligent CV Management System: Multi-agent GenAI solution built with Google's Agent Development Kit (ADK), Smart document parsing with entity extraction and metadata enrichment, Semantic search using vector embeddings and retrieval via Vertex AI",
-        "Supply Chain Analyzer – GenAI-Powered Logistics Intelligence System: Cloud-native GenAI system for analyzing international supply chain constraints, Document search pipeline powered by Amazon Titan and OpenSearch Service, Final AI responses generated using Claude 3.5 Sonnet via Amazon Bedrock",
-        "Computer System Validation (CSV) Platform – Pharmaceutical Industry: Multi-agent GenAI system designed for automated validation and compliance analysis in pharmaceutical environments"
+        "Autonomous Incident Resolution: Engineered a multi-agent system to automate ServiceNow ticket resolution, achieving high initial resolution rates and significantly reducing Mean Time to Repair (MTTR)",
+        "Multi-Modal Agentic Workflow: Architected specialized agent roles including a KB Retrieval Agent for instant solution matching, an OCR Agent for screenshot analysis, a Log Analysis Agent for technical troubleshooting, and a Web Search Agent for real-time documentation retrieval",
+        "Self-Improving Knowledge Flywheel: Implemented a sophisticated feedback loop that autonomously updates the Knowledge Base (KB) with successful resolutions, creating a system that improves in accuracy and domain expertise over time"
       ],
-      "techStack": "Python, GCP ADK, Gemini Flash 2.0, Vertex AI, Cloud Storage, PostgreSQL, ReactJS, AWS Bedrock, Claude 3.5 Sonnet, Amazon Titan, OpenSearch, Azure AI Services, GPT-4.1 mini, CrewAI Tools"
+      "techStack": "Python, Multi-Agent Systems, ServiceNow, OCR, Knowledge Base, RAG"
     },
     {
-      "date": "03/2024 – 08/2024",
-      "title": "Data Scientist & Artificial Intelligence Engineer (Internship)",
-      "company": "Capgemini TS",
+      "date": "03/2024 – 12/2025",
+      "title": "GenAI Engineer",
+      "company": "Capgemini TS (GenAI Lab)",
       "location": "Casablanca, Morocco",
       "details": [
-        "Codebase Analysis & Documentation Generator – Intelligent Code Understanding System: Dual-path processing system combining vector embeddings and knowledge graph construction for comprehensive codebase analysis",
-        "Automated directory and file extraction with entity identification for code components and relationships mapping",
-        "Semantic code search using Pinecone vector database for contextual code retrieval",
-        "Knowledge graph representation in Neo4j database for code relationship"
+        "AI-Powered HR Platform: Designed a production multi-agent copilot using Google ADK, reducing manual CV screening effort by 75–80% through automated parsing and intelligent matching",
+        "Supply Chain Analyzer: Built an AWS Bedrock-native conversational AI for real-time logistics analysis, delivering 60–65% faster query resolution using a full RAG pipeline (Amazon Titan + OpenSearch)",
+        "Computer System Validation (CSV) Platform: Engineered a multi-agent system using CrewAI for the pharmaceutical industry, reducing validation cycle times by 45–55% while maintaining GxP compliance",
+        "Intelligent Code Understanding Copilot: Developed a dual-path code intelligence system combining Pinecone and Neo4j (GraphRAG) for semantic search and relationship mapping across complex codebases"
       ],
-      "techStack": "Python, Pinecone, Neo4j, Gemini 1.5 pro, Google embeddings, Recursive chunking, Langchain"
+      "techStack": "Python, GCP ADK, Gemini Flash 2.0, Vertex AI, Cloud Storage, PostgreSQL, ReactJS, AWS Bedrock, Claude 3.5 Sonnet, Amazon Titan, OpenSearch, Azure AI Services, GPT-4.1 mini, CrewAI Tools, Pinecone, Neo4j, LangChain"
     },
     {
       "date": "08/2023 – 09/2023",
@@ -71,34 +70,6 @@
         "Analytical dashboards with Python (Pandas, NumPy) for procurement insights visualization"
       ],
       "techStack": "Python, Pandas, NumPy, Microsoft SQL Server, Power BI"
-    },
-    {
-      "date": "04/2022 – 06/2022",
-      "title": "Full-stack Developer (Internship)",
-      "company": "Société Tangéroise de Maintenance (STM)",
-      "location": "Tangier, Morocco",
-      "details": [
-        "Development of a web application for taxi booking"
-      ]
-    },
-    {
-      "date": "04/2021 – 06/2021",
-      "title": "Intern",
-      "company": "Institut National de la Recherche Agronomique",
-      "location": "Tangier, Morocco",
-      "details": [
-        "Use of MATLAB programming language in the study of goat behavior"
-      ]
-    },
-    {
-      "date": "06/2019 – 08/2019",
-      "title": "Business Analyst (Seasonal)",
-      "company": "M'nar Park",
-      "location": "Tangier, Morocco",
-      "details": [
-        "Collection and organization of multi-source data for strategic analysis",
-        "Development of reports and dashboards optimizing operational performance"
-      ]
     }
   ],
   "freelanceExperience": [
@@ -118,7 +89,7 @@
     {
       "title": "GenAI Engineer",
       "type": "Freelance",
-      "location": "Remote",
+      "location": "Remote (USA)",
       "project": "AI Agent for Commercial Property Ownership Research",
       "details": [
         "Developed an intelligent AI agent system for automated commercial property ownership research and due diligence",

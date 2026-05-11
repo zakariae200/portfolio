@@ -1,337 +1,430 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { FaExternalLinkAlt, FaTimes } from 'react-icons/fa';
+import { ExternalLink, X, Calendar } from 'lucide-react';
 import certC1 from '../images/architecture/certif C1.png';
 
 const SectionContainer = styled.section`
-  padding: 5rem 10%;
-  background-color: white;
+  padding: 4rem 8% 5rem;
+  background: #ffffff;
   position: relative;
   overflow: hidden;
-  
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 400px;
-    height: 400px;
-    background: radial-gradient(circle, rgba(26, 26, 94, 0.03) 0%, transparent 70%);
-    z-index: 0;
+
+  @media (max-width: 1200px) {
+    padding: 4rem 6%;
   }
-  
+
   @media (max-width: 768px) {
     padding: 3rem 5%;
   }
+
+  @media (max-width: 576px) {
+    padding: 2.5rem 4%;
+  }
 `;
 
-const SectionTitle = styled.h2`
-  font-size: 2.5rem;
-  color: #1a1a5e;
-  margin-bottom: 3rem;
+const SectionHeader = styled.div`
   text-align: center;
+  margin-bottom: 3rem;
   position: relative;
-  
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80px;
-    height: 4px;
-    background: linear-gradient(to right, #1a1a5e, #00b8d4);
-    border-radius: 2px;
+  z-index: 1;
+
+  @media (max-width: 768px) {
+    margin-bottom: 2.5rem;
+  }
+`;
+
+
+const SectionTitle = styled.h2`
+  font-size: 2.75rem;
+  color: #0f172a;
+  margin: 0 0 0.75rem 0;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+
+  @media (max-width: 768px) {
+    font-size: 2.2rem;
+  }
+
+  @media (max-width: 576px) {
+    font-size: 1.8rem;
+  }
+`;
+
+const SectionSubtitle = styled.p`
+  color: #64748b;
+  font-size: 1.05rem;
+  max-width: 580px;
+  margin: 0 auto;
+  line-height: 1.6;
+
+  @media (max-width: 576px) {
+    font-size: 0.95rem;
   }
 `;
 
 const CertificationsGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 2rem;
-  
-  @media (max-width: 768px) {
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1rem;
+  max-width: 1100px;
+  margin: 0 auto;
+
+  @media (max-width: 480px) {
     grid-template-columns: 1fr;
   }
 `;
 
 const CertificationCard = styled.div`
-  background-color: white;
-  border-radius: 15px;
-  overflow: hidden;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-  transition: all 0.3s ease;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: all 0.25s ease;
   display: flex;
   flex-direction: column;
-  
+  gap: 1rem;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+
   &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+    border-color: rgba(0, 184, 212, 0.4);
+    box-shadow: 0 12px 28px rgba(0, 184, 212, 0.1);
+  }
+
+  @media (max-width: 576px) {
+    padding: 1.2rem;
+    border-radius: 10px;
   }
 `;
 
-const CertificationHeader = styled.div`
-  background: ${props => props.bgColor || 'linear-gradient(135deg, #1a1a5e, #3a3a8e)'};
-  padding: 1.5rem;
+const CardHeader = styled.div`
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+
+  @media (max-width: 576px) {
+    gap: 0.8rem;
+  }
+`;
+
+const LogoBox = styled.div`
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  border-radius: 10px;
+  background: #ffffff;
   display: flex;
   align-items: center;
-  gap: 1rem;
+  justify-content: center;
+  padding: 8px;
+  border: 1px solid #e2e8f0;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  @media (max-width: 576px) {
+    width: 44px;
+    height: 44px;
+    padding: 6px;
+  }
 `;
 
-const CertificationLogo = styled.img`
-  width: 50px;
-  height: 50px;
-  object-fit: contain;
-  border-radius: 50%;
-  background-color: white;
-  padding: 5px;
-`;
-
-const CertificationBody = styled.div`
-  padding: 1.5rem;
+const HeaderInfo = styled.div`
   flex: 1;
-  display: flex;
-  flex-direction: column;
+  min-width: 0;
 `;
 
 const CertificationTitle = styled.h3`
-  font-size: 1.2rem;
-  color: white;
-  margin: 0;
+  font-size: 1.05rem;
+  color: #0f172a;
+  margin: 0 0 0.25rem 0;
   font-weight: 600;
+  line-height: 1.35;
+
+  @media (max-width: 576px) {
+    font-size: 1rem;
+  }
 `;
 
 const CertificationIssuer = styled.p`
-  color: rgba(255, 255, 255, 0.8);
-  margin: 0.5rem 0 0 0;
-  font-size: 0.9rem;
+  color: #00b8d4;
+  margin: 0;
+  font-size: 0.85rem;
+  font-weight: 500;
 `;
 
 const CertificationDescription = styled.p`
-  color: #666;
-  margin: 0 0 1.5rem 0;
-  font-size: 0.95rem;
-  line-height: 1.5;
+  color: #64748b;
+  margin: 0;
+  font-size: 0.85rem;
+  line-height: 1.55;
   flex: 1;
+
+  @media (max-width: 576px) {
+    font-size: 0.82rem;
+  }
 `;
 
 const CertificationFooter = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding-top: 1rem;
+  border-top: 1px solid #f1f5f9;
   margin-top: auto;
+  gap: 0.5rem;
+  flex-wrap: wrap;
 `;
 
 const CertificationDate = styled.span`
-  font-size: 0.9rem;
-  color: #888;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.8rem;
+  color: #64748b;
+
+  svg {
+    color: #94a3b8;
+  }
 `;
 
 const VerifyButton = styled.a`
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  color: #1a1a5e;
+  gap: 0.4rem;
+  color: #00b8d4;
   text-decoration: none;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   font-weight: 500;
-  transition: all 0.3s ease;
+  transition: color 0.25s ease;
   cursor: pointer;
-  
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: inherit;
+
+  svg {
+    transition: transform 0.25s ease;
+  }
+
   &:hover {
-    color: #00b8d4;
+    color: #0f172a;
+
+    svg {
+      transform: translate(2px, -2px);
+    }
   }
 `;
 
 const Modal = styled.div`
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
+  inset: 0;
+  background: rgba(15, 23, 42, 0.55);
   display: ${props => (props.isOpen ? 'flex' : 'none')};
   justify-content: center;
   align-items: center;
   z-index: 1000;
+  padding: 1rem;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  animation: fadeIn 0.2s ease;
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
 `;
 
 const ModalContent = styled.div`
-  background-color: white;
-  padding: 2rem;
-  border-radius: 10px;
-  max-width: 90%;
-  max-height: 90%;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 1.25rem;
+  max-width: 92%;
+  max-height: 92vh;
   overflow: auto;
   position: relative;
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.18);
+  animation: slideUp 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 576px) {
+    border-radius: 12px;
+    padding: 1rem;
+  }
 `;
 
 const CloseButton = styled.button`
   position: absolute;
   top: 1rem;
   right: 1rem;
-  background: none;
-  border: none;
-  color: #1a1a5e;
-  font-size: 1.5rem;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
+  color: #64748b;
+  transition: all 0.25s ease;
+  z-index: 10;
+
+  &:hover {
+    background: #ffffff;
+    border-color: rgba(0, 184, 212, 0.4);
+    color: #00b8d4;
+    transform: rotate(90deg);
+  }
+
+  @media (max-width: 576px) {
+    width: 32px;
+    height: 32px;
+  }
 `;
 
 const CertificateImage = styled.img`
   max-width: 100%;
+  max-height: 80vh;
   height: auto;
+  display: block;
+  border-radius: 8px;
 `;
+
+const certificationsData = [
+  {
+    id: 1,
+    title: 'OCI Generative AI Professional',
+    issuer: 'Oracle',
+    logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Oracle_logo.svg/2560px-Oracle_logo.svg.png',
+    description: "Validates expertise in implementing and managing Oracle Cloud Infrastructure's Generative AI services, including large language models, prompt engineering, and AI application development.",
+    date: 'January 2025',
+    verifyUrl: 'https://catalog-education.oracle.com/ords/certview/sharebadge?id=A9E60B1455F6CB6862C563C826D9DC49236F74E36FF6AD949AF39A63D2391734'
+  },
+  {
+    id: 2,
+    title: 'Microsoft Azure AI Fundamentals',
+    issuer: 'Microsoft',
+    logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Microsoft_logo.svg/2048px-Microsoft_logo.svg.png',
+    description: "Demonstrates foundational knowledge of machine learning and AI concepts, along with related Microsoft Azure services. Covers AI workloads, principles, and Microsoft's responsible AI guidelines.",
+    date: '2024',
+    verifyUrl: 'https://learn.microsoft.com/api/credentials/share/en-us/zakariaeelmernissi-7076/E2FFE0AEEB70B12C?sharingId'
+  },
+  {
+    id: 3,
+    title: 'AWS Partner: Generative AI Essentials',
+    issuer: 'Amazon Web Services',
+    logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Amazon_Web_Services_Logo.svg/1024px-Amazon_Web_Services_Logo.svg.png',
+    description: 'Covers essential knowledge of generative AI technologies and AWS services for building and deploying generative AI solutions, including Amazon Bedrock, SageMaker, and other AI/ML services.',
+    date: 'September 2024',
+    verifyUrl: 'https://www.credly.com/badges/15f13f50-d7c8-4feb-9460-387e20d41502/linked_in_profile'
+  },
+  {
+    id: 4,
+    title: 'Google Cloud: Generative AI',
+    issuer: 'Google Cloud',
+    logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Google_Cloud_logo.svg/2560px-Google_Cloud_logo.svg.png',
+    description: "Validates proficiency in Google Cloud's generative AI tools and services, including Vertex AI, PaLM API, and generative AI application development best practices.",
+    date: 'February 2024',
+    verifyUrl: 'https://partner.cloudskillsboost.google/public_profiles/1cd12157-a00d-4cf2-a725-9cec1df8d1ce/badges/8329808'
+  },
+  {
+    id: 5,
+    title: 'ALX Data Analyst',
+    issuer: 'ALX Africa',
+    logo: 'https://www.alxafrica.com/wp-content/uploads/2023/12/logo-black.svg',
+    description: 'Awarded for successful completion of the ALX Data Analyst program. Demonstrates advanced skills in data analytics, data visualization, SQL, Python, and real-world business problem solving using industry-standard tools and methodologies.',
+    date: 'February 2024',
+    verifyUrl: 'https://intranet.alxswe.com/certificates/8fHNJEz5r2'
+  },
+  {
+    id: 6,
+    title: 'EFSET English Certificate (CEFR Level C1)',
+    issuer: 'EF Education First',
+    logo: 'https://images.seeklogo.com/logo-png/45/1/ef-education-first-logo-png_seeklogo-455160.png',
+    description: 'Advanced English proficiency certification at the C1 level of the Common European Framework of Reference (CEFR). Demonstrates professional working proficiency in reading, listening, and language comprehension.',
+    date: 'December 2024',
+    modalImage: certC1
+  }
+];
 
 const Certifications = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedCertificate, setSelectedCertificate] = useState(null);
-  
+
   const openCertificateModal = (certificate) => {
     setSelectedCertificate(certificate);
     setIsModalOpen(true);
     document.body.style.overflow = 'hidden';
   };
-  
+
   const closeCertificateModal = () => {
     setIsModalOpen(false);
     document.body.style.overflow = 'auto';
   };
-  
+
   return (
     <SectionContainer id="certifications">
-      <SectionTitle>Certifications</SectionTitle>
+      <SectionHeader>
+        <SectionTitle>Certifications</SectionTitle>
+        <SectionSubtitle>
+          Industry-recognized credentials in Generative AI, cloud platforms, and data analytics.
+        </SectionSubtitle>
+      </SectionHeader>
+
       <CertificationsGrid>
-        <CertificationCard>
-          <CertificationHeader bgColor="linear-gradient(135deg, #F80000, #FF8C00)">
-            <CertificationLogo src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Oracle_logo.svg/2560px-Oracle_logo.svg.png" alt="Oracle" />
-            <div>
-              <CertificationTitle>OCI Generative AI Professional</CertificationTitle>
-              <CertificationIssuer>Oracle</CertificationIssuer>
-            </div>
-          </CertificationHeader>
-          <CertificationBody>
-            <CertificationDescription>
-              Validates expertise in implementing and managing Oracle Cloud Infrastructure's Generative AI services, including large language models, prompt engineering, and AI application development.
-            </CertificationDescription>
+        {certificationsData.map((cert) => (
+          <CertificationCard key={cert.id}>
+            <CardHeader>
+              <LogoBox>
+                <img src={cert.logo} alt={cert.issuer} />
+              </LogoBox>
+              <HeaderInfo>
+                <CertificationTitle>{cert.title}</CertificationTitle>
+                <CertificationIssuer>{cert.issuer}</CertificationIssuer>
+              </HeaderInfo>
+            </CardHeader>
+
+            <CertificationDescription>{cert.description}</CertificationDescription>
+
             <CertificationFooter>
-              <CertificationDate>January 2025</CertificationDate>
-              <VerifyButton href="https://catalog-education.oracle.com/ords/certview/sharebadge?id=A9E60B1455F6CB6862C563C826D9DC49236F74E36FF6AD949AF39A63D2391734" target="_blank">
-                Verify <FaExternalLinkAlt />
-              </VerifyButton>
+              <CertificationDate>
+                <Calendar size={12} /> {cert.date}
+              </CertificationDate>
+              {cert.modalImage ? (
+                <VerifyButton
+                  as="button"
+                  type="button"
+                  onClick={() => openCertificateModal(cert.modalImage)}
+                >
+                  Verify <ExternalLink size={13} />
+                </VerifyButton>
+              ) : (
+                <VerifyButton
+                  href={cert.verifyUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Verify <ExternalLink size={13} />
+                </VerifyButton>
+              )}
             </CertificationFooter>
-          </CertificationBody>
-        </CertificationCard>
-        
-        <CertificationCard>
-          <CertificationHeader bgColor="linear-gradient(135deg, #00A4EF, #0078D4)">
-            <CertificationLogo src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Microsoft_logo.svg/2048px-Microsoft_logo.svg.png" alt="Microsoft" />
-            <div>
-              <CertificationTitle>Microsoft Azure AI Fundamentals</CertificationTitle>
-              <CertificationIssuer>Microsoft</CertificationIssuer>
-            </div>
-          </CertificationHeader>
-          <CertificationBody>
-            <CertificationDescription>
-              Demonstrates foundational knowledge of machine learning and AI concepts, along with related Microsoft Azure services. Covers AI workloads, principles, and Microsoft's responsible AI guidelines.
-            </CertificationDescription>
-            <CertificationFooter>
-              <CertificationDate>2024</CertificationDate>
-              <VerifyButton href="https://learn.microsoft.com/api/credentials/share/en-us/zakariaeelmernissi-7076/E2FFE0AEEB70B12C?sharingId" target="_blank">
-                Verify <FaExternalLinkAlt />
-              </VerifyButton>
-            </CertificationFooter>
-          </CertificationBody>
-        </CertificationCard>
-        
-        <CertificationCard>
-          <CertificationHeader bgColor="linear-gradient(135deg, #FF9900, #232F3E)">
-            <CertificationLogo src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Amazon_Web_Services_Logo.svg/1024px-Amazon_Web_Services_Logo.svg.png" alt="AWS" />
-            <div>
-              <CertificationTitle>AWS Partner: Generative AI Essentials</CertificationTitle>
-              <CertificationIssuer>Amazon Web Services</CertificationIssuer>
-            </div>
-          </CertificationHeader>
-          <CertificationBody>
-            <CertificationDescription>
-              Covers essential knowledge of generative AI technologies and AWS services for building and deploying generative AI solutions, including Amazon Bedrock, SageMaker, and other AI/ML services.
-            </CertificationDescription>
-            <CertificationFooter>
-              <CertificationDate>September 2024</CertificationDate>
-              <VerifyButton href="https://www.credly.com/badges/15f13f50-d7c8-4feb-9460-387e20d41502/linked_in_profile" target="_blank">
-                Verify <FaExternalLinkAlt />
-              </VerifyButton>
-            </CertificationFooter>
-          </CertificationBody>
-        </CertificationCard>
-        
-        <CertificationCard>
-          <CertificationHeader bgColor="linear-gradient(135deg, #4285F4, #34A853, #FBBC05, #EA4335)">
-            <CertificationLogo src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Google_Cloud_logo.svg/2560px-Google_Cloud_logo.svg.png" alt="Google Cloud" />
-            <div>
-              <CertificationTitle>Google Cloud: Generative AI</CertificationTitle>
-              <CertificationIssuer>Google Cloud</CertificationIssuer>
-            </div>
-          </CertificationHeader>
-          <CertificationBody>
-            <CertificationDescription>
-              Validates proficiency in Google Cloud's generative AI tools and services, including Vertex AI, PaLM API, and generative AI application development best practices.
-            </CertificationDescription>
-            <CertificationFooter>
-              <CertificationDate>February 2024</CertificationDate>
-              <VerifyButton href="https://partner.cloudskillsboost.google/public_profiles/1cd12157-a00d-4cf2-a725-9cec1df8d1ce/badges/8329808" target="_blank">
-                Verify <FaExternalLinkAlt />
-              </VerifyButton>
-            </CertificationFooter>
-          </CertificationBody>
-        </CertificationCard>
-        
-        <CertificationCard>
-          <CertificationHeader bgColor="linear-gradient(135deg,rgb(131, 23, 23),rgb(53, 52, 133),rgb(17, 52, 150))">
-            <CertificationLogo src='https://www.alxafrica.com/wp-content/uploads/2023/12/logo-black.svg' alt="ALX" />
-            <div>
-              <CertificationTitle>ALX Data Analyst</CertificationTitle>
-              <CertificationIssuer>ALX Africa</CertificationIssuer>
-            </div>
-          </CertificationHeader>
-          <CertificationBody>
-            <CertificationDescription>
-              Awarded for successful completion of the ALX Data Analyst program. Demonstrates advanced skills in data analytics, data visualization, SQL, Python, and real-world business problem solving using industry-standard tools and methodologies.
-            </CertificationDescription>
-            <CertificationFooter>
-              <CertificationDate>February 2024</CertificationDate>
-              <VerifyButton href="https://intranet.alxswe.com/certificates/8fHNJEz5r2" target="_blank">
-                Verify <FaExternalLinkAlt />
-              </VerifyButton>
-            </CertificationFooter>
-          </CertificationBody>
-        </CertificationCard>
-        <CertificationCard>
-          <CertificationHeader bgColor="linear-gradient(135deg, #2C3E50, #4CA1AF)">
-            <CertificationLogo src="https://images.seeklogo.com/logo-png/45/1/ef-education-first-logo-png_seeklogo-455160.png" alt="EFSET" />
-            <div>
-              <CertificationTitle>EFSET English Certificate (CEFR Level C1)</CertificationTitle>
-              <CertificationIssuer>EF Education First</CertificationIssuer>
-            </div>
-          </CertificationHeader>
-          <CertificationBody>
-            <CertificationDescription>
-              Advanced English proficiency certification at the C1 level of the Common European Framework of Reference (CEFR). Demonstrates professional working proficiency in reading, listening, and language comprehension.
-            </CertificationDescription>
-            <CertificationFooter>
-              <CertificationDate>December 2024</CertificationDate>
-              <VerifyButton onClick={() => openCertificateModal(certC1)}>
-                Verify <FaExternalLinkAlt />
-              </VerifyButton>
-            </CertificationFooter>
-          </CertificationBody>
-        </CertificationCard>
-        
+          </CertificationCard>
+        ))}
       </CertificationsGrid>
-      
+
       <Modal isOpen={isModalOpen} onClick={closeCertificateModal}>
         <ModalContent onClick={e => e.stopPropagation()}>
-          <CloseButton onClick={closeCertificateModal}>
-            <FaTimes />
+          <CloseButton onClick={closeCertificateModal} aria-label="Close">
+            <X size={16} />
           </CloseButton>
           {selectedCertificate && (
             <CertificateImage src={selectedCertificate} alt="Certificate" />
