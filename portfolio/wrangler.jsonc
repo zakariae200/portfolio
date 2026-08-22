@@ -1,0 +1,11 @@
+{
+  // Static-asset-only Worker: no `main` script, Cloudflare just serves the
+  // React build. The API lives separately on Fly.
+  "name": "zakariae-portfolio-web",
+  "compatibility_date": "2026-08-22",
+  "assets": {
+    "directory": "./build",
+    // Serve index.html for unknown paths so client-side routing works.
+    "not_found_handling": "single-page-application"
+  }
+}
