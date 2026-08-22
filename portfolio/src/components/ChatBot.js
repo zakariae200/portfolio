@@ -6,6 +6,10 @@ import ReactMarkdown from 'react-markdown';
 import hiImage from '../images/3d hi bg.png';
 import computerImage from '../images/computer bg.png';
 
+// Empty in development: package.json "proxy" forwards /api to the backend.
+// In production this is set to the deployed API URL at build time.
+const API_URL = process.env.REACT_APP_API_URL || '';
+
 const popIn = keyframes`
   0% { transform: scale(0); opacity: 0; }
   70% { transform: scale(1.1); opacity: 1; }
@@ -461,7 +465,7 @@ const ChatBot = () => {
 
     try {
       // Call backend API without exposing the system prompt
-      const response = await fetch('/api/chat', {
+      const response = await fetch(`${API_URL}/api/chat`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
