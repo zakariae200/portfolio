@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-import { Calendar, MapPin, ChevronDown, Briefcase, Globe, Clock, Sparkles } from 'lucide-react';
+import { Calendar, MapPin, ChevronDown, Briefcase, Globe, Clock } from 'lucide-react';
 
 const SectionContainer = styled.section`
   padding: 6rem 8% 5rem;
@@ -508,11 +508,11 @@ const experienceData = [
     isNew: true,
     projects: [
       {
-        name: 'Autonomous Incident Resolution',
+        name: 'Autonomous Incident Resolution & Remediation',
         details: [
-          'Engineered a multi-agent system to automate ServiceNow ticket resolution, achieving high initial resolution rates and significantly reducing Mean Time to Repair (MTTR).',
-          'Architected specialized agent roles including a KB Retrieval Agent for instant solution matching, an OCR Agent for screenshot analysis, a Log Analysis Agent for technical troubleshooting, and a Web Search Agent for real-time documentation retrieval.',
-          'Implemented a sophisticated feedback loop that autonomously updates the Knowledge Base (KB) with successful resolutions, creating a system that improves in accuracy and domain expertise over time.'
+          'Engineered a multi-agent system that autonomously investigates the exact root cause and location of production errors, automates remediation, and applies fixes through a mandatory human validation gate for security and compliance  significantly reducing Mean Time to Repair (MTTR) and ensuring operational continuity of the run team.',
+          'Specialized Agent Architecture: architected dedicated agent roles a KB Agent for instant solution matching, an OCR Agent for screenshot analysis, a Log Agent for deep technical troubleshooting, and a Web Search Agent for real-time documentation retrieval  enabling autonomous diagnosis and controlled remediation.',
+          'Self-Improving Knowledge Flywheel: implemented a feedback loop that autonomously enriches the Knowledge Base (KB) with human-validated resolutions, creating a continuously self-improving system that grows in accuracy and domain expertise over time.'
         ]
       }
     ]
@@ -613,7 +613,7 @@ const freelanceData = [
   },
   {
     id: 5,
-    title: 'GenAI Engineer',
+    title: 'GenAI / Prompt Engineer',
     project: 'AI Agent System for HR Recruitment',
     location: 'France',
     duration: '2 months',
@@ -677,9 +677,7 @@ const ExperienceItem = ({ experience }) => {
             <TitleRow>
               <JobTitle>{experience.title}</JobTitle>
               {experience.isNew && (
-                <NewBadge>
-                  <Sparkles size={10} /> Current
-                </NewBadge>
+                <NewBadge>Current</NewBadge>
               )}
             </TitleRow>
             <CompanyName>{experience.company}</CompanyName>

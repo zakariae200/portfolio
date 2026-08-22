@@ -1,9 +1,12 @@
 import React, { useState, useRef } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { Mail, Phone, MapPin, Send, X, CheckCircle2, AlertTriangle } from 'lucide-react';
-import emailjs from '@emailjs/browser';
 import characterImage from '../images/email smile.png';
 import errorImage from '../images/error.png';
+
+// Empty in development: package.json "proxy" forwards /api to the backend.
+// In production this is set to the deployed API URL at build time.
+const API_URL = process.env.REACT_APP_API_URL || '';
 
 const SectionContainer = styled.section`
   padding: 4rem 8% 5rem;
@@ -415,11 +418,14 @@ const Contact = () => {
     name: '',
     email: '',
     subject: '',
-    message: ''
+    message: '',
+    // Honeypot: hidden from real users, bots fill it in.
+    website: ''
   });
   const [loading, setLoading] = useState(false);
   const [showSuccessPopup, setShowSuccessPopup] = useState(false);
   const [showErrorPopup, setShowErrorPopup] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
   const formRef = useRef();
 
   const handleChange = (e) => {
@@ -430,70 +436,38 @@ const Contact = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setShowSuccessPopup(false);
     setShowErrorPopup(false);
-    
-    // Parameters for auto-reply to the user
-    const autoReplyParams = {
-      to_name: formData.name,
-      to_email: formData.email,
-      from_name: 'Zakariae El Mernissi',
-      from_email: 'zakariaeelmernissi@gmail.com',
-      reply_to: 'zakariaeelmernissi@gmail.com',
-      subject: formData.subject,
-      message: formData.message
-    };
-    
-    // Parameters for sending the message to you
-    const contactMeParams = {
-      to_email: 'zakariaeelmernissi@gmail.com',
-      name: formData.name,
-      email: formData.email,
-      from_email: formData.email,
-      title: formData.subject,
-      message: `From: ${formData.name} (${formData.email})\n\n${formData.message}`,
-      reply_to: formData.email
-    };
-    
-    // Send auto-reply to the user
-    emailjs.send(
-      'service_rstafvr',
-      'template_58q8ta4', // Auto-reply template ID
-      autoReplyParams,
-      'a-yPOYztv6sesaNTq'
-    )
-    .then((result) => {
-      console.log('Auto-reply sent successfully:', result.text);
-      
-      // Send the message to you
-      return emailjs.send(
-        'service_rstafvr',
-        'template_a40f3j7', // Your new Contact Us template ID - update this if different
-        contactMeParams,
-        'a-yPOYztv6sesaNTq'
-      );
-    })
-    .then((result) => {
-      console.log('Contact message sent successfully:', result.text);
-      setLoading(false);
-      setShowSuccessPopup(true);
-      
-      // Reset form after submission
-      setFormData({
-        name: '',
-        email: '',
-        subject: '',
-        message: ''
+
+    try {
+      const response = await fetch(`${API_URL}/api/contact`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
       });
-    })
-    .catch((error) => {
-      console.error('Error sending email:', error.text);
-      setLoading(false);
+
+      if (!response.ok) {
+        // 429 means the rate limiter kicked in, which deserves its own message.
+        setErrorMessage(
+          response.status === 429
+            ? 'You have sent several messages already. Please try again later.'
+            : 'Something went wrong. Please try again, or email me directly.'
+        );
+        setShowErrorPopup(true);
+        return;
+      }
+
+      setShowSuccessPopup(true);
+      setFormData({ name: '', email: '', subject: '', message: '', website: '' });
+    } catch (error) {
+      setErrorMessage('Could not reach the server. Please check your connection.');
       setShowErrorPopup(true);
-    });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -517,13 +491,13 @@ const Contact = () => {
             </ContactDetails>
           </ContactCard>
 
-          <ContactCard href="tel:+212636363170">
+          <ContactCard href="tel:+212663363170">
             <IconBox>
               <Phone size={18} />
             </IconBox>
             <ContactDetails>
               <ContactType>Phone</ContactType>
-              <ContactValue>+212 636363170</ContactValue>
+              <ContactValue>+212 663 36 31 70</ContactValue>
             </ContactDetails>
           </ContactCard>
 
@@ -596,6 +570,25 @@ const Contact = () => {
             />
           </FormGroup>
 
+          {/* Honeypot: hidden from people, irresistible to bots. Not a
+              type="hidden" field, because bots skip those. */}
+          <input
+            type="text"
+            name="website"
+            value={formData.website}
+            onChange={handleChange}
+            tabIndex="-1"
+            autoComplete="off"
+            aria-hidden="true"
+            style={{
+              position: 'absolute',
+              left: '-9999px',
+              width: '1px',
+              height: '1px',
+              opacity: 0
+            }}
+          />
+
           <SubmitButton type="submit" disabled={loading}>
             {loading ? 'Sending...' : 'Send Message'} <Send size={15} />
           </SubmitButton>
@@ -660,7 +653,7 @@ const Contact = () => {
                   Message Failed
                 </PopupTitle>
                 <PopupMessage>
-                  There was a problem sending your message. Please try again later or contact me directly via email.
+                  {errorMessage || 'There was a problem sending your message. Please try again later or contact me directly via email.'}
                 </PopupMessage>
               </PopupBody>
             </PopupContent>

@@ -2,7 +2,7 @@ import React from 'react';
 import styled, { keyframes } from 'styled-components';
 import { motion } from 'framer-motion';
 import { FaArrowRight, FaGithub, FaLinkedin } from 'react-icons/fa';
-import { Mail, Phone, ChevronDown, Sparkles } from 'lucide-react';
+import { Mail, Phone, ChevronDown } from 'lucide-react';
 import characterImage from '../images/pointing.png';
 
 const gradientShift = keyframes`
@@ -140,23 +140,31 @@ const CharacterImg = styled.img`
   }
 `;
 
-const Badge = styled(motion.div)`
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 1rem;
-  background: rgba(0, 184, 212, 0.15);
-  border: 1px solid rgba(0, 184, 212, 0.3);
-  border-radius: 50px;
-  color: #00b8d4;
-  font-size: 0.85rem;
-  font-weight: 500;
-  margin-bottom: 1.5rem;
-  backdrop-filter: blur(10px);
+const RoleLabel = styled(motion.div)`
+  /* align-self stops the flex parent stretching this to the full column:
+     inline-flex is blockified on a flex child, so it cannot hug on its own. */
+  align-self: flex-start;
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  margin-bottom: 1.25rem;
+  font-size: 1rem;
+  font-weight: 400;
+  color: #94a3b8;
+
+  /* Weight and colour carry the hierarchy instead of a box or an icon. */
+  strong {
+    color: #e2e8f0;
+    font-weight: 600;
+  }
+
+  em {
+    color: #64748b;
+    font-style: normal;
+  }
 
   @media (max-width: 375px) {
-    font-size: 0.8rem;
-    padding: 0.4rem 0.8rem;
+    font-size: 0.9rem;
   }
 `;
 
@@ -522,10 +530,9 @@ const Hero = () => {
         initial="hidden"
         animate="visible"
       >
-        <Badge variants={itemVariants}>
-          <Sparkles size={14} />
-          GenAI Consultant @ Deloitte
-        </Badge>
+        <RoleLabel variants={itemVariants}>
+          GenAI Consultant <em>@</em> <strong>Deloitte</strong>
+        </RoleLabel>
 
         <Greeting variants={itemVariants}>
           Hello, I'm
@@ -537,9 +544,9 @@ const Hero = () => {
 
         <motion.div variants={itemVariants}>
           <Subheading>
-            <GradientText>GenAI Consultant</GradientText> specializing in
-            Generative AI solutions for enterprise applications.
-            Building intelligent systems that transform how businesses operate.
+            I build <GradientText>production multi-agent systems</GradientText> and
+            RAG pipelines for enterprise — from autonomous incident remediation
+            to regulated pharma workflows, across Azure, GCP and AWS.
           </Subheading>
         </motion.div>
 
@@ -548,9 +555,9 @@ const Hero = () => {
             <Mail size={16} />
             zakariaeelmernissi@gmail.com
           </ContactItem>
-          <ContactItem href="tel:+212636363170">
+          <ContactItem href="tel:+212663363170">
             <Phone size={16} />
-            +212 636363170
+            +212 663 36 31 70
           </ContactItem>
         </ContactInfo>
 

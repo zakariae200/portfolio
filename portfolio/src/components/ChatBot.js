@@ -482,11 +482,11 @@ const ChatBot = () => {
       }
 
       const data = await response.json();
-      // Backend returns a clean { message: "..." } shape.
+      // Backend returns a clean { reply: "..." } shape.
       let botResponse = "Sorry, I couldn't process your request.";
 
-      if (typeof data.message === 'string' && data.message.trim()) {
-        botResponse = data.message.trim();
+      if (typeof data.reply === 'string' && data.reply.trim()) {
+        botResponse = data.reply.trim();
       }
 
       // Add bot response to messages

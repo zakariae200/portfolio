@@ -380,89 +380,92 @@ const FrameworkName = styled.p`
 // Skills data with logos
 const skillsData = [
   {
-    id: 'genai',
-    title: 'Generative AI',
-    icon: 'https://cdn-icons-png.flaticon.com/512/8637/8637099.png',
-    description: 'LLMs, RAG Systems & Multi-Agent AI',
+    id: 'agents',
+    title: 'LLMs & Agent Frameworks',
+    icon: 'https://cdn-icons-png.flaticon.com/512/4712/4712035.png',
+    description: 'Models, multi-agent orchestration & protocols',
     frameworks: [
       { name: 'OpenAI GPT', logo: 'https://cdn.worldvectorlogo.com/logos/openai-wordmark.svg' },
       { name: 'Google Gemini', logo: 'https://cdn.worldvectorlogo.com/logos/gemini-ai.svg' },
       { name: 'Claude', logo: 'https://cdn.worldvectorlogo.com/logos/claude-3.svg' },
-      { name: 'LangChain', logo: 'https://cdn.worldvectorlogo.com/logos/langchain-1.svg' },
-      { name: 'LangGraph', logo: 'https://langchain-ai.github.io/langgraph/static/wordmark_dark.svg' },
-      { name: 'CrewAI', logo: 'https://cdn.worldvectorlogo.com/logos/crewai-1.svg' },
-      { name: 'LlamaIndex', logo: 'https://www.llamaindex.ai/brand/llamaindex-wordmark-black.svg' },
+      { name: 'Kimi', logo: 'https://cdn.simpleicons.org/kimi/1D1D1F' },
+      { name: 'LangGraph', logo: 'https://raw.githubusercontent.com/lobehub/lobe-icons/refs/heads/master/packages/static-avatar/avatars/langgraph.webp' },
       { name: 'Google ADK', logo: 'https://google.github.io/adk-docs/assets/agent-development-kit.png' },
+      { name: 'CrewAI', logo: 'https://cdn.worldvectorlogo.com/logos/crewai-1.svg' },
+      { name: 'MCP', logo: 'https://cdn.simpleicons.org/modelcontextprotocol/000000' },
+      { name: 'Microsoft Agent Framework', logo: 'https://cdn.worldvectorlogo.com/logos/azure-2.svg' },
+      { name: 'LangChain', logo: 'https://cdn.worldvectorlogo.com/logos/langchain-1.svg' },
+    ]
+  },
+  {
+    id: 'rag',
+    title: 'RAG & Vector Search',
+    icon: 'https://cdn-icons-png.flaticon.com/512/3126/3126647.png',
+    description: 'Retrieval pipelines & vector stores',
+    frameworks: [
+      { name: 'LlamaIndex', logo: 'https://www.llamaindex.ai/brand/llamaindex-wordmark-black.svg' },
+      { name: 'Pinecone', logo: 'https://cdn-1.webcatalog.io/catalog/pinecone/pinecone-icon-filled-256.webp' },
+      { name: 'Azure AI Search', logo: 'https://az-icons.com/export/icons/0d1430225c8904846d5b5c0e5b410823.svg' },
+      { name: 'Qdrant', logo: 'https://qdrant.tech/img/brand-resources-logos/logomark.svg' },
+      { name: 'Weaviate', logo: 'https://weaviate.io/img/site/weaviate-logo-light.png' },
     ]
   },
   {
     id: 'cloud',
-    title: 'Cloud Platforms',
+    title: 'Cloud AI Platforms',
     icon: 'https://cdn-icons-png.flaticon.com/512/4215/4215831.png',
-    description: 'GCP, AWS & Azure',
+    description: 'Azure, GCP & AWS AI services',
     frameworks: [
-      { name: 'Google Cloud', logo: 'https://cdn.worldvectorlogo.com/logos/google-cloud-1.svg' },
-      { name: 'Microsoft Azure', logo: 'https://cdn.worldvectorlogo.com/logos/azure-2.svg' },
-      { name: 'AWS', logo: 'https://cdn.worldvectorlogo.com/logos/aws-2.svg' },
+      { name: 'Azure AI Foundry', logo: 'https://ai.azure.com/assets/AzureAI-3f9f7a71.svg' },
       { name: 'Vertex AI', logo: 'https://www.gstatic.com/bricks/image/cf69f322-f5ae-4d81-80e4-3dd008aca174.svg' },
       { name: 'AWS Bedrock', logo: 'https://registry.npmmirror.com/@lobehub/icons-static-png/1.74.0/files/dark/bedrock-color.png' },
-      { name: 'Azure AI Search', logo: 'https://az-icons.com/export/icons/0d1430225c8904846d5b5c0e5b410823.svg' },
-      { name: 'Azure AI Foundry', logo: 'https://ai.azure.com/assets/AzureAI-3f9f7a71.svg' },
-      { name: 'Azure OpenAI', logo: 'https://az-icons.com/export/icons/ab7d4a660b7712dc407b9eef4c69f2ef.svg' }
+      { name: 'Microsoft Azure', logo: 'https://cdn.worldvectorlogo.com/logos/azure-2.svg' },
+      { name: 'Google Cloud', logo: 'https://cdn.worldvectorlogo.com/logos/google-cloud-1.svg' },
+      { name: 'AWS', logo: 'https://cdn.worldvectorlogo.com/logos/aws-2.svg' },
     ]
   },
   {
-    id: 'programming',
-    title: 'Programming',
-    icon: 'https://cdn-icons-png.flaticon.com/512/1336/1336494.png',
-    description: 'Python, SQL & API Development',
+    id: 'llmops',
+    title: 'LLMOps & Guardrails',
+    icon: 'https://cdn-icons-png.flaticon.com/512/3588/3588592.png',
+    description: 'Evaluation, tracing & AI security',
+    frameworks: [
+      { name: 'RAGAS', logo: 'https://docs.ragas.io/en/stable/_static/imgs/ragas-logo.png' },
+      { name: 'DeepEval', logo: 'https://avatars.githubusercontent.com/u/130818866?s=200&v=4' },
+      { name: 'TruLens', logo: 'https://www.trulens.org/assets/images/Neural_Network_Explainability.png' },
+      { name: 'MLflow', logo: 'https://raw.githubusercontent.com/mlflow/mlflow/refs/heads/master/assets/logo.svg' },
+      { name: 'LangSmith', logo: 'https://cdn.simpleicons.org/langchain/1C3C3C' },
+      { name: 'OpenTelemetry', logo: 'https://cdn.simpleicons.org/opentelemetry/425CC7' },
+    ]
+  },
+  {
+    id: 'automation',
+    title: 'Automation & Integration',
+    icon: 'https://cdn-icons-png.flaticon.com/512/1006/1006771.png',
+    description: 'Low-code workflows & enterprise connectors',
+    frameworks: [
+      { name: 'n8n', logo: 'https://cdn.simpleicons.org/n8n/EA4B71' },
+      { name: 'Make', logo: 'https://cdn.simpleicons.org/make/6D00CC' },
+      { name: 'Zapier', logo: 'https://cdn.simpleicons.org/zapier/FF4F00' },
+      { name: 'Langflow', logo: 'https://cdn.simpleicons.org/langflow/7C3AED' },
+    ]
+  },
+  {
+    id: 'engineering',
+    title: 'Engineering & Delivery',
+    icon: 'https://cdn-icons-png.flaticon.com/512/4299/4299956.png',
+    description: 'APIs, data stores & CI/CD',
     frameworks: [
       { name: 'Python', logo: 'https://cdn.worldvectorlogo.com/logos/python-5.svg' },
-      { name: 'SQL', logo: 'https://cdn-icons-png.flaticon.com/512/4492/4492311.png' },
       { name: 'FastAPI', logo: 'https://cdn.worldvectorlogo.com/logos/fastapi.svg' },
-      { name: 'Flask', logo: 'https://cdn.worldvectorlogo.com/logos/flask.svg' },
-      { name: 'Streamlit', logo: 'https://streamlit.io/images/brand/streamlit-mark-color.svg' },
-      { name: 'Gradio', logo: 'https://www.gradio.app/_app/immutable/assets/gradio.CHB5adID.svg' }
-    ]
-  },
-  {
-    id: 'databases',
-    title: 'Databases',
-    icon: 'https://cdn-icons-png.flaticon.com/512/4299/4299956.png',
-    description: 'SQL, NoSQL & Vector Databases',
-    frameworks: [
-      { name: 'PostgreSQL', logo: 'https://cdn.worldvectorlogo.com/logos/postgresql.svg' },
+      { name: 'SQL', logo: 'https://cdn-icons-png.flaticon.com/512/4492/4492311.png' },
+      { name: 'PostgreSQL', logo: 'https://cdn.simpleicons.org/postgresql/4169E1' },
       { name: 'MongoDB', logo: 'https://cdn.worldvectorlogo.com/logos/mongodb-icon-1.svg' },
       { name: 'Neo4j', logo: 'https://cdn.worldvectorlogo.com/logos/neo4j.svg' },
-      { name: 'Pinecone', logo: 'https://cdn-1.webcatalog.io/catalog/pinecone/pinecone-icon-filled-256.webp?v=1714775459840' },
-      { name: 'Elasticsearch', logo: 'https://cdn.worldvectorlogo.com/logos/elasticsearch.svg' },
-      { name: 'Weaviate', logo: 'https://weaviate.io/img/site/weaviate-logo-light.png' },
-      { name: 'Qdrant', logo: 'https://qdrant.tech/img/brand-resources-logos/logomark.svg' }
-    ]
-  },
-  {
-    id: 'devops',
-    title: 'DevOps',
-    icon: 'https://cdn-icons-png.flaticon.com/512/919/919853.png',
-    description: 'CI/CD & Infrastructure',
-    frameworks: [
-      { name: 'Git', logo: 'https://cdn.worldvectorlogo.com/logos/git-icon.svg' },
-      { name: 'GitHub Actions', logo: 'https://cdn.worldvectorlogo.com/logos/github-icon-1.svg' },
-      { name: 'GitLab CI/CD', logo: 'https://cdn.worldvectorlogo.com/logos/gitlab.svg' },
+      { name: 'Docker', logo: 'https://cdn.worldvectorlogo.com/logos/docker.svg' },
       { name: 'Terraform', logo: 'https://cdn.worldvectorlogo.com/logos/terraform-enterprise.svg' },
-      { name: 'Docker', logo: 'https://cdn.worldvectorlogo.com/logos/docker.svg' }
-    ]
-  },
-  {
-    id: 'evaluation',
-    title: 'AI Evaluation',
-    icon: 'https://cdn-icons-png.flaticon.com/512/3588/3588592.png',
-    description: 'Testing & Quality Assurance',
-    frameworks: [
-      { name: 'DeepEval', logo: 'https://avatars.githubusercontent.com/u/130818866?s=200&v=4' },
-      { name: 'RAGAS', logo: 'https://docs.ragas.io/en/stable/_static/imgs/ragas-logo.png' },
-      { name: 'MLFlow', logo: 'https://raw.githubusercontent.com/mlflow/mlflow/refs/heads/master/assets/logo.svg' },
-      { name: 'TruLens', logo: 'https://www.trulens.org/assets/images/Neural_Network_Explainability.png' }
+      { name: 'GitHub Actions', logo: 'https://cdn.worldvectorlogo.com/logos/github-icon-1.svg' },
+      { name: 'Streamlit', logo: 'https://streamlit.io/images/brand/streamlit-mark-color.svg' },
     ]
   }
 ];

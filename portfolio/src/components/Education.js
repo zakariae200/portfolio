@@ -507,11 +507,10 @@ const hackathonsData = [
   {
     id: 1,
     name: 'Ignition Lab',
-    date: '2024',
-    rating : '4,7/5',
+    date: '2026',
+    rating : '4,9/5',
     image: winner,
-    badge: { label: 'Winner', color: '#f59e0b' },
-    achievement: '1st Place'
+    badge: { label: 'Winner', color: '#028a0f' }
   },
   {
     id: 2,

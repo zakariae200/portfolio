@@ -501,7 +501,7 @@ const ViewButton = styled.button`
 const projectsData = [
   {
     id: 1,
-    title: "Multi-Agent System for HR Departement ",
+    title: "Multi-Agent System for HR Department",
     description: "A sophisticated multi-agent system built with Google's Agent Development Kit (ADK) for HR departments, featuring specialized agents for CV analysis, candidate screening, and recruitment automation.",
     image: multiAgentADK,
     tags: ["ADK", "Multi-Agent", "Google Cloud", "RAG", "AI Agents"],

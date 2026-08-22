@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Download, Sparkles, Mail } from 'lucide-react';
+import { Download, Mail } from 'lucide-react';
 import { FaLinkedinIn, FaGithub } from 'react-icons/fa';
 import CV from '../Zakariae_El_Mernissi_2026-05-06.pdf';
 
@@ -17,7 +17,10 @@ const NavbarContainer = styled.nav`
   width: calc(100% - 3rem);
   max-width: 1400px;
   border-radius: 16px;
-  z-index: 1100;
+  /* Layer scale: page content 1-10 | nav 890-900 | overlays 1000+.
+     The navbar must sit BELOW modals so a dialog covers it rather than
+     competing with its own close button. */
+  z-index: 900;
   transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   overflow: hidden;
 
@@ -249,7 +252,8 @@ const MobileMenuOverlay = styled(motion.div)`
   background: rgba(10, 10, 26, 0.96);
   backdrop-filter: blur(24px) saturate(180%);
   -webkit-backdrop-filter: blur(24px) saturate(180%);
-  z-index: 1050;
+  /* Just under the navbar (900) so its close button stays reachable. */
+  z-index: 890;
   display: flex;
   flex-direction: column;
   padding:
@@ -467,7 +471,6 @@ const Navbar = () => {
     <>
       <NavbarContainer scrolled={scrolled}>
         <Logo href="#" onClick={closeMenu}>
-          <Sparkles size={20} color="#00b8d4" />
           <span>Zakariae</span>
         </Logo>
 

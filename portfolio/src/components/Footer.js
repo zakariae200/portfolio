@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Heart, Mail, Phone, MapPin, ArrowUp } from 'lucide-react';
+import { Mail, Phone, MapPin, ArrowUp } from 'lucide-react';
 import { FaLinkedinIn, FaGithub, FaFacebookF } from 'react-icons/fa';
 
 const FooterContainer = styled.footer`
@@ -288,8 +288,8 @@ const Footer = () => {
               </a>
             </FooterLink>
             <FooterLink>
-              <a href="tel:+212636363170">
-                <Phone size={14} /> +212 636363170
+              <a href="tel:+212663363170">
+                <Phone size={14} /> +212 663 36 31 70
               </a>
             </FooterLink>
             <FooterLink>
@@ -310,7 +310,7 @@ const Footer = () => {
       <CopyrightRow>
         <span>&copy; {currentYear} Zakariae El Mernissi. All rights reserved.</span>
         <MadeWith>
-          Made with <Heart size={12} /> by{' '}
+          Made by{' '}
           <a href="https://linkedin.com/in/el-mernissi-zakariae/" target="_blank" rel="noopener noreferrer">
             Zakariae
           </a>

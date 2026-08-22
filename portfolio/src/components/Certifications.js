@@ -304,7 +304,7 @@ const certificationsData = [
     id: 1,
     title: 'OCI Generative AI Professional',
     issuer: 'Oracle',
-    logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Oracle_logo.svg/2560px-Oracle_logo.svg.png',
+    logo: 'https://cdn.worldvectorlogo.com/logos/oracle-6.svg',
     description: "Validates expertise in implementing and managing Oracle Cloud Infrastructure's Generative AI services, including large language models, prompt engineering, and AI application development.",
     date: 'January 2025',
     verifyUrl: 'https://catalog-education.oracle.com/ords/certview/sharebadge?id=A9E60B1455F6CB6862C563C826D9DC49236F74E36FF6AD949AF39A63D2391734'
@@ -313,7 +313,7 @@ const certificationsData = [
     id: 2,
     title: 'Microsoft Azure AI Fundamentals',
     issuer: 'Microsoft',
-    logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Microsoft_logo.svg/2048px-Microsoft_logo.svg.png',
+    logo: 'https://cdn.worldvectorlogo.com/logos/microsoft-5.svg',
     description: "Demonstrates foundational knowledge of machine learning and AI concepts, along with related Microsoft Azure services. Covers AI workloads, principles, and Microsoft's responsible AI guidelines.",
     date: '2024',
     verifyUrl: 'https://learn.microsoft.com/api/credentials/share/en-us/zakariaeelmernissi-7076/E2FFE0AEEB70B12C?sharingId'
@@ -322,7 +322,7 @@ const certificationsData = [
     id: 3,
     title: 'AWS Partner: Generative AI Essentials',
     issuer: 'Amazon Web Services',
-    logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Amazon_Web_Services_Logo.svg/1024px-Amazon_Web_Services_Logo.svg.png',
+    logo: 'https://cdn.worldvectorlogo.com/logos/aws-2.svg',
     description: 'Covers essential knowledge of generative AI technologies and AWS services for building and deploying generative AI solutions, including Amazon Bedrock, SageMaker, and other AI/ML services.',
     date: 'September 2024',
     verifyUrl: 'https://www.credly.com/badges/15f13f50-d7c8-4feb-9460-387e20d41502/linked_in_profile'
@@ -331,7 +331,7 @@ const certificationsData = [
     id: 4,
     title: 'Google Cloud: Generative AI',
     issuer: 'Google Cloud',
-    logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Google_Cloud_logo.svg/2560px-Google_Cloud_logo.svg.png',
+    logo: 'https://cdn.worldvectorlogo.com/logos/google-cloud-1.svg',
     description: "Validates proficiency in Google Cloud's generative AI tools and services, including Vertex AI, PaLM API, and generative AI application development best practices.",
     date: 'February 2024',
     verifyUrl: 'https://partner.cloudskillsboost.google/public_profiles/1cd12157-a00d-4cf2-a725-9cec1df8d1ce/badges/8329808'
@@ -349,7 +349,7 @@ const certificationsData = [
     id: 6,
     title: 'EFSET English Certificate (CEFR Level C1)',
     issuer: 'EF Education First',
-    logo: 'https://images.seeklogo.com/logo-png/45/1/ef-education-first-logo-png_seeklogo-455160.png',
+    logo: 'https://cdn.worldvectorlogo.com/logos/ef-education-first.svg',
     description: 'Advanced English proficiency certification at the C1 level of the Common European Framework of Reference (CEFR). Demonstrates professional working proficiency in reading, listening, and language comprehension.',
     date: 'December 2024',
     modalImage: certC1
