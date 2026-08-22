@@ -1,0 +1,19 @@
+# Secrets must never enter the build context.
+.env
+
+# Local tooling and caches
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+
+# Not needed at runtime
+scripts/
+requirements-dev.txt
+data/cv.pdf
+README.md
+Dockerfile
+.dockerignore
+fly.toml
