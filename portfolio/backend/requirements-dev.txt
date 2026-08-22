@@ -1,0 +1,8 @@
+# Local tooling only — NOT installed in the production image.
+#
+# pymupdf4llm is AGPL-3.0. It runs on your machine to regenerate data/cv.md
+# and is never deployed, so it stays out of requirements.txt.
+
+-r requirements.txt
+
+pymupdf4llm==1.28.2

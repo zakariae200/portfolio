@@ -1,0 +1,17 @@
+# Direct dependencies only, pinned for reproducible builds.
+# Transitive deps (uvicorn, starlette, httpx, python-dotenv...) are resolved by pip.
+
+# Web framework. [standard] pulls in uvicorn + the `fastapi` CLI.
+fastapi[standard]==0.141.1
+
+# Typed settings loaded from .env
+pydantic-settings==2.15.0
+
+# Gemini API client
+google-genai==2.18.0
+
+# Per-IP rate limiting (in-memory backend, no Redis needed)
+slowapi==0.1.10
+
+# Transactional email for the contact form
+resend==2.37.0
