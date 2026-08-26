@@ -450,12 +450,23 @@ const Contact = () => {
       });
 
       if (!response.ok) {
-        // 429 means the rate limiter kicked in, which deserves its own message.
-        setErrorMessage(
-          response.status === 429
-            ? 'You have sent several messages already. Please try again later.'
-            : 'Something went wrong. Please try again, or email me directly.'
-        );
+        let message = 'Something went wrong. Please try again, or email me directly.';
+
+        if (response.status === 429) {
+          // The rate limiter kicked in — not an error the visitor can fix by retrying now.
+          message = 'You have sent several messages already. Please try again later.';
+        } else if (response.status === 422) {
+          // Validation failed server-side. Name the field so it is actionable.
+          const body = await response.json().catch(() => null);
+          const field = body?.detail?.[0]?.loc?.[1];
+          message = field === 'message'
+            ? 'Your message is too short — please write at least 10 characters.'
+            : field === 'email'
+              ? 'That email address does not look valid.'
+              : 'Please fill in every field and try again.';
+        }
+
+        setErrorMessage(message);
         setShowErrorPopup(true);
         return;
       }
@@ -566,6 +577,8 @@ const Contact = () => {
               placeholder="Tell me about your idea..."
               value={formData.message}
               onChange={handleChange}
+              // Mirrors the backend rule so the browser blocks it before a round trip.
+              minLength={10}
               required
             />
           </FormGroup>
