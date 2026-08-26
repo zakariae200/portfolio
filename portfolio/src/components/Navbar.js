@@ -68,10 +68,7 @@ const Logo = styled.a`
   -webkit-tap-highlight-color: transparent;
 
   span {
-    background: linear-gradient(135deg, #00b8d4 0%, #7c3aed 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: #f1f5f9;
   }
 
   @media (max-width: 768px) {
@@ -121,7 +118,7 @@ const NavLink = styled.a`
     transform: translateX(-50%) scaleX(${props => props.active ? 1 : 0});
     width: 20px;
     height: 2px;
-    background: linear-gradient(90deg, #00b8d4, #7c3aed);
+    background: #00b8d4;
     border-radius: 2px;
     transition: transform 0.3s ease;
   }
@@ -280,7 +277,7 @@ const MobileMenuOverlay = styled(motion.div)`
     left: -10%;
     width: 60%;
     height: 60%;
-    background: radial-gradient(circle, rgba(124, 58, 237, 0.14) 0%, transparent 60%);
+    background: radial-gradient(circle, rgba(0, 184, 212, 0.12) 0%, transparent 60%);
     pointer-events: none;
   }
 `;

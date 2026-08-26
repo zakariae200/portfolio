@@ -5,12 +5,6 @@ import { FaArrowRight, FaGithub, FaLinkedin } from 'react-icons/fa';
 import { Mail, Phone, ChevronDown } from 'lucide-react';
 import characterImage from '../images/pointing.png';
 
-const gradientShift = keyframes`
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-`;
-
 const floatParticle = keyframes`
   0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.3; }
   50% { transform: translateY(-30px) rotate(180deg); opacity: 0.8; }
@@ -20,9 +14,7 @@ const HeroContainer = styled.div`
   display: flex;
   min-height: 100vh;
   padding: 6rem 8% 3rem;
-  background: linear-gradient(135deg, #0a0a1a 0%, #111136 50%, #0d0d2b 100%);
-  background-size: 400% 400%;
-  animation: ${gradientShift} 15s ease infinite;
+  background: linear-gradient(160deg, #0a0a1a 0%, #101028 100%);
   position: relative;
   overflow: hidden;
   align-items: center;
@@ -36,7 +28,7 @@ const HeroContainer = styled.div`
     bottom: 0;
     background: 
       radial-gradient(circle at 20% 50%, rgba(0, 184, 212, 0.08) 0%, transparent 50%),
-      radial-gradient(circle at 80% 80%, rgba(124, 58, 237, 0.06) 0%, transparent 50%);
+      radial-gradient(circle at 80% 80%, rgba(0, 184, 212, 0.05) 0%, transparent 50%);
     pointer-events: none;
   }
 
@@ -217,12 +209,8 @@ const Heading = styled(motion.h1)`
 `;
 
 const GradientText = styled.span`
-  background: linear-gradient(135deg, #00b8d4 0%, #7c3aed 50%, #00b8d4 100%);
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation: ${gradientShift} 5s linear infinite;
+  color: #00b8d4;
+  font-weight: 500;
 `;
 
 const Subheading = styled(motion.p)`
@@ -510,11 +498,11 @@ const Hero = () => {
 
   const particles = [
     { top: '15%', left: '10%', size: '6px', color: '#00b8d4', duration: '7s', delay: '0s' },
-    { top: '25%', left: '85%', size: '4px', color: '#7c3aed', duration: '9s', delay: '1s' },
+    { top: '25%', left: '85%', size: '4px', color: '#00b8d4', duration: '9s', delay: '1s' },
     { top: '60%', left: '5%', size: '5px', color: '#10b981', duration: '8s', delay: '2s' },
     { top: '70%', left: '90%', size: '3px', color: '#f59e0b', duration: '6s', delay: '0.5s' },
     { top: '40%', left: '15%', size: '4px', color: '#00b8d4', duration: '10s', delay: '3s' },
-    { top: '80%', left: '70%', size: '5px', color: '#7c3aed', duration: '7s', delay: '1.5s' },
+    { top: '80%', left: '70%', size: '5px', color: '#00b8d4', duration: '7s', delay: '1.5s' },
     { top: '10%', left: '60%', size: '3px', color: '#10b981', duration: '8s', delay: '2.5s' },
     { top: '85%', left: '30%', size: '4px', color: '#f59e0b', duration: '9s', delay: '0s' },
   ];
@@ -545,7 +533,7 @@ const Hero = () => {
         <motion.div variants={itemVariants}>
           <Subheading>
             I build <GradientText>production multi-agent systems</GradientText> and
-            RAG pipelines for enterprise — from autonomous incident remediation
+            RAG pipelines for enterprise, from autonomous incident remediation
             to regulated pharma workflows, across Azure, GCP and AWS.
           </Subheading>
         </motion.div>
