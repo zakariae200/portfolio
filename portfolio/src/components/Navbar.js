@@ -408,7 +408,7 @@ const Navbar = () => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 80);
 
-      const sections = ['experience', 'skills', 'projects', 'certifications', 'education', 'contact'];
+      const sections = ['services', 'experience', 'skills', 'projects', 'certifications', 'education', 'contact'];
       for (const section of [...sections].reverse()) {
         const element = document.getElementById(section);
         if (element) {
@@ -440,6 +440,7 @@ const Navbar = () => {
   }, []);
 
   const navItems = [
+    { id: 'services', label: 'Services' },
     { id: 'experience', label: 'Experience' },
     { id: 'skills', label: 'Skills' },
     { id: 'projects', label: 'Projects' },

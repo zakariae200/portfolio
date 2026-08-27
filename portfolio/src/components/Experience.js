@@ -9,17 +9,6 @@ const SectionContainer = styled.section`
   position: relative;
   overflow: hidden;
 
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 200px;
-    background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
-    pointer-events: none;
-  }
-
   @media (max-width: 1200px) {
     padding: 5rem 6% 4rem;
   }
